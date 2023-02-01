@@ -3,21 +3,34 @@ import { useTheme } from 'next-themes'
 import Button from '@/components/Button'
 import Link from 'next/link'
 
+// Define navigation links with label and path
 const navigations = [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about' },
 ]
 
 const Header = () => {
+
+    // Use the theme hook from next-themes library to manage theme state
     const { systemTheme, theme, setTheme } = useTheme()
+
     const [mounted, setMounted] = useState(false)
+
+    // Use effect hook to set dark mode button as mounted
     useEffect(() => {
         setMounted(true)
     }, [])
 
-    const darkModeButton = () => {
+    // Function to render the dark mode button
+    const renderDarkModeButton = () => {
+
+        // If the theme mounted, do nothing
         if (!mounted) return null
+
+        // Determine the current theme from system default
         const currentTheme = theme === 'system' ? systemTheme : theme
+
+        // If the current theme is dark, render a button that sets the theme to light
         if (currentTheme === 'dark') {
             return (
                 <Button className='ease-in duration-300 bg-gray-200 dark:bg-purple-600' onClick={() => setTheme('light')}>
@@ -27,6 +40,7 @@ const Header = () => {
                 </Button>
             )
         } else {
+            // If the current theme is not dark, render a button that sets the theme to dark
             return (
                 <Button className='ease-in duration-300 bg-gray-200' onClick={() => setTheme('dark')}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
@@ -38,6 +52,7 @@ const Header = () => {
         }
     }
 
+    // Return the header component with navigation links and dark mode button
     return (
         <header className='h-16 flex items-center justify-between'>
             <>
@@ -47,7 +62,7 @@ const Header = () => {
                         {nav.label}
                     </Link>))}
                 </ul>
-                {darkModeButton()}
+                {renderDarkModeButton()}
             </>
         </header>
     )
