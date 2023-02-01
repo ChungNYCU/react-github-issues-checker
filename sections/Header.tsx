@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
-import { useTheme } from 'next-themes'
-import Button from '@/components/Button'
+import { useEffect, useState } from 'react'
+
 import Link from 'next/link'
+import { useTheme } from 'next-themes'
+
+import Button from '@/components/Button'
 
 // Define navigation links with label and path
 const navigations = [
@@ -10,7 +12,6 @@ const navigations = [
 ]
 
 const Header = () => {
-
     // Use the theme hook from next-themes library to manage theme state
     const { systemTheme, theme, setTheme } = useTheme()
 
@@ -23,7 +24,6 @@ const Header = () => {
 
     // Function to render the dark mode button
     const renderDarkModeButton = () => {
-
         // If the theme mounted, do nothing
         if (!mounted) return null
 
