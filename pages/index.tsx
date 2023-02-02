@@ -1,4 +1,4 @@
-import IndexBody from "@/sections/IndexBody"
+import IndexBody from '@/sections/IndexBody'
 
 export default function Home() {
   return (
