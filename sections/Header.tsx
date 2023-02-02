@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 
+import Image from 'next/image'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 import { useTheme } from 'next-themes'
 
 import Button from '@/components/Button'
@@ -14,7 +16,7 @@ const navigations = [
 const Header = () => {
     // Use the theme hook from next-themes library to manage theme state
     const { systemTheme, theme, setTheme } = useTheme()
-
+    const { data: session } = useSession()
     const [mounted, setMounted] = useState(false)
 
     // Use effect hook to set dark mode button as mounted
@@ -52,6 +54,16 @@ const Header = () => {
         }
     }
 
+    const renderLogInUser = () => {
+        return (
+            <div className="flex flex-row items-center px-5 mx-auto my-8">
+                <h6 className='mr-2'>Logged in User:</h6>
+                <Image className='mr-2' src={session!.user?.image!} alt={'user image'} width="20" height="20"></Image>
+                <h6>{session?.user?.name}</h6>
+            </div>
+        )
+    }
+
     // Return the header component with navigation links and dark mode button
     return (
         <header className='h-16 flex items-center justify-between'>
@@ -62,7 +74,10 @@ const Header = () => {
                         {nav.label}
                     </Link>))}
                 </ul>
-                {renderDarkModeButton()}
+                <div className='flex flex-row items-center'>
+                    {session && renderLogInUser()}
+                    {renderDarkModeButton()}
+                </div>
             </>
         </header>
     )
