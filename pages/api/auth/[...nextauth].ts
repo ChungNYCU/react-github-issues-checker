@@ -8,8 +8,8 @@ export default NextAuth({
             clientSecret: process.env.GITHUB_CLIENT_SECRET!,
             // @ts-ignore
             scope: "repo",
-            secret: process.env.NEXTAUTH_SECRET!,
+            secret: process.env.SECRET,
         }),
     ],
-    
+    secret: process.env.NEXTAUTH_SECRET!,
 })
