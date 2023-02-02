@@ -1,12 +1,16 @@
 import { useSession, signIn, signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 import Button from '@/components/Button'
 
-const IndexBody = () => {
-    const { data: session } = useSession()
 
-    const handleClick = () => {
-        alert('User id: ' + session?.user?.name! + '\n' + 'User image: ' + session?.user?.image!)
+const IndexBody = () => {
+
+    const { data: session } = useSession()
+    const router = useRouter()
+
+    const directToIssueList = () => {
+        router.push('/issueList')
     }
 
     return (
@@ -20,7 +24,7 @@ const IndexBody = () => {
             </p>
             <div className='flex items-center justify-between'>
                 {!session && <Button className='ease-in duration-300 bg-blue-500 text-white px-6' onClick={() => signIn()}>Login</Button>}
-                {session && <Button className='ease-in duration-300 bg-blue-500 text-white px-6' onClick={handleClick}>Go</Button>}
+                {session && <Button className='ease-in duration-300 bg-blue-500 text-white px-6' onClick={directToIssueList}>Start</Button>}
                 {session && <Button className='ease-in duration-300 bg-red-500 text-white px-6' onClick={() => signOut()}>Logout</Button>}
             </div>
         </section>
