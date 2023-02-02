@@ -2,12 +2,12 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 
 import Button from '@/components/Button'
 
-const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    alert('wip')
-};
-
 const IndexBody = () => {
     const { data: session } = useSession()
+
+    const handleClick = () => {
+        alert('User id: ' + session?.user?.name! + '\n' + 'User image: ' + session?.user?.image!)
+    }
 
     return (
         <section className='mt-16'>
