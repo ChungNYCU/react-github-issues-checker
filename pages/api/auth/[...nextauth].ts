@@ -10,5 +10,5 @@ export default NextAuth({
             scope: "repo",
         }),
     ],
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.SECRET,
 })
