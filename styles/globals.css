@@ -5,6 +5,7 @@
 @layer base {
     body {
         @apply max-w-2xl mx-auto px-4;
+        @apply font-mono;
         @apply ease-in duration-300 dark:bg-black dark:text-gray-100 bg-gray-50 text-gray-900;
     }
 
@@ -16,7 +17,19 @@
         @apply text-4xl;
     }
 
+    h4 {
+        @apply text-2xl;
+    }
+
+    h5 {
+        @apply text-xl;
+    }
+
+    h6 {
+        @apply text-lg;
+    }
+
     .navbar {
-        @apply ease-in duration-300 font-semibold text-gray-400 hover:text-purple-600;
+        @apply ease-in duration-300 font-semibold text-gray-400 hover:text-blue-500;
     }
 }
