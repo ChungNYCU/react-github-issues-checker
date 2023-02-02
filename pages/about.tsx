@@ -9,10 +9,10 @@ const About = () => {
             <p className="mt-10">強尼是一名工程師,他想要幫助開發團隊更有效地管理專案。團隊已⻑期使用 GitHub,但他們在使用 Issue 來追蹤進度上遇到困難。
                 因此他決定串接 GitHub API 並使用 React.js 開發一個網頁來提供更有效的專案管理工具,希望熟悉前端的你能幫助他完成這個專案。</p>
 
-            <h5 className="text-center font-semibold mt-20 dark:text-blue-500">題目描述</h5>
+            <h5 className="font-semibold mt-20 dark:text-blue-500">題目描述</h5>
             <p className="mt-5">串接 GitHub API,使用戶能夠「新增」、「更新」、「搜尋」Task,並能夠更新 Task 的狀態。</p>
 
-            <h5 className="text-center font-semibold mt-20 dark:text-blue-500">基本要求</h5>
+            <h5 className="font-semibold mt-20 dark:text-blue-500">基本要求</h5>
             <ul className="mt-5 list-disc">
                 <li>使用 React.js 或基於此的框架,例如 Next.js</li>
                 <li>不限制使用任何第三方 library</li>
@@ -20,7 +20,7 @@ const About = () => {
                 <li>請在 README 內說明如何啟動專案與作業架構的設計</li>
             </ul>
 
-            <h5 className="text-center font-semibold mt-20 dark:text-blue-500">功能</h5>
+            <h5 className="font-semibold mt-20 dark:text-blue-500">功能</h5>
 
             <h6 className="mt-5 font-semibold">GitHub Login</h6>
             <ul className="mt-1 list-disc">
@@ -63,10 +63,10 @@ const About = () => {
             </ul>
 
 
-            <h5 className="text-center font-semibold mt-20 dark:text-blue-500">範例</h5>
+            <h5 className="font-semibold mt-20 dark:text-blue-500">範例</h5>
             <Image className='mt-5' src={'/example.png'} alt={'example'} width="1491" height="924"></Image>
             
-            <h5 className="text-center font-semibold mt-20 dark:text-blue-500">加分條件</h5>
+            <h5 className="font-semibold mt-20 dark:text-blue-500">加分條件</h5>
             <ul className="mt-5 list-disc">
                 <li>使用 TypeScript</li>
                 <li>未使用現成的 GitHub API client (如 Octokit) 串接 GitHub API</li>
@@ -74,7 +74,7 @@ const About = () => {
                 <li>有 deploy 至線上環境</li>
             </ul>
 
-            <h5 className="text-center font-semibold mt-20 dark:text-blue-500">評分項目</h5>
+            <h5 className="font-semibold mt-20 dark:text-blue-500">評分項目</h5>
             <ul className="mt-5 list-disc">
                 <li>正確性:必須符合基本要求、能正常運作</li>
                 <li>效能:例如避免重複發送 API 請求、避免 component re-render</li>
