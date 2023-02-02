@@ -1,9 +1,9 @@
-import Body from "@/sections/Body";
+import IndexBody from "@/sections/IndexBody"
 
 export default function Home() {
   return (
-    <div>
-      <Body />
+    <div >
+      <IndexBody />
     </div >
   )
 }

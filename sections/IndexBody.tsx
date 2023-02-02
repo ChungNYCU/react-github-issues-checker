@@ -1,10 +1,10 @@
-import Button from "@/components/Button"
+import Button from '@/components/Button'
 
 const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 
 };
 
-const Body = () => {
+const IndexBody = () => {
     return (
         <section className='mt-16'>
             <h1 className='font-bold'>Welcome to <span className='dark:text-purple-600'>GitHub</span> issues checker</h1>
@@ -18,4 +18,4 @@ const Body = () => {
         </section>
     )
 }
-export default Body
+export default IndexBody
