@@ -1,10 +1,14 @@
+import { useSession, signIn, signOut } from 'next-auth/react'
+
 import Button from '@/components/Button'
 
 const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-
+    alert('wip')
 };
 
 const IndexBody = () => {
+    const { data: session } = useSession()
+
     return (
         <section className='mt-16'>
             <h1 className='font-bold'>Welcome to <span className='dark:text-blue-500'>GitHub</span> issues checker</h1>
@@ -14,7 +18,11 @@ const IndexBody = () => {
                 add, update, and search GitHub repository issues as a Task,
                 and update the status of Task.
             </p>
-            <Button className='ease-in duration-300 bg-blue-500 text-white px-6' onClick={handleClick}>Login</Button>
+            <div className='flex items-center justify-between'>
+                {!session && <Button className='ease-in duration-300 bg-blue-500 text-white px-6' onClick={() => signIn()}>Login</Button>}
+                {session && <Button className='ease-in duration-300 bg-blue-500 text-white px-6' onClick={handleClick}>Go</Button>}
+                {session && <Button className='ease-in duration-300 bg-red-500 text-white px-6' onClick={() => signOut()}>Logout</Button>}
+            </div>
         </section>
     )
 }
