@@ -1,6 +1,22 @@
+import Button from '@/components/Button'
+import Link from 'next/link'
+
 const PageNotFound = () => {
     return (
-        <div className="text-center text-gray-600 font-semibold mt-20 text-2xl">Page Not Found</div>
+        <section className="flex items-center h-full p-16 dark:text-gray-100">
+            <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+                <div className="max-w-md text-center">
+                    <h2 className="mb-8 font-extrabold text-9xl dark:text-purple-600">
+                        <span className="sr-only">Error</span>404
+                    </h2>
+                    <p className="text-2xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
+                    <p className="mt-4 mb-8 dark:text-gray-400">But dont worry, you can find plenty of other things on our homepage.</p>
+                    <Link href="/">
+                        <Button className='ease-in duration-300 bg-purple-600 text-white px-6' onClick={() => { }}>Back to homepage</Button>
+                    </Link>
+                </div>
+            </div>
+        </section>
     )
 }
 
