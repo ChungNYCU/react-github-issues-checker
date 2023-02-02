@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const About = () => {
     return (
-        <div>
+        <section>
             <h3 className="text-center font-semibold mt-20 dark:text-blue-500">About</h3>
 
             <h4 className="text-center font-semibold mt-20 dark:text-blue-500">Dcard 2023 Frontend Intern Homework</h4>
@@ -81,7 +81,7 @@ const About = () => {
                 <li>程式碼架構與品質:例如易讀性、一致性、重用性</li>
             </ul>
 
-        </div>
+        </section>
     )
 }
 
