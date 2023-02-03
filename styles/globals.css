@@ -30,10 +30,10 @@
     }
 
     .navbar {
-        @apply ease-in duration-300 font-semibold text-gray-400 hover:text-blue-500;
+        @apply ease-in duration-300 text-lg font-semibold text-gray-400 hover:text-blue-500;
     }
 
     .reponame {
-        @apply ease-in duration-300 font-semibold hover:text-blue-500;
+        @apply ease-in duration-200 font-semibold hover:text-blue-500 rounded-md hover:ring-2;
     }
 }

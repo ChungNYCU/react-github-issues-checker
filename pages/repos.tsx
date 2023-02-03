@@ -54,10 +54,11 @@ const selectRepo = () => {
         return (
             <section>
                 <h1 className='mt-10 dark:text-blue-500'>Select a repository</h1>
-                <div className=' mt-10 grid grid-cols-1 gap-4 content-start'>
+                {/* <div className=' mt-10 grid grid-cols-1 gap-4 content-start'>  */}
+                <div className='mt-10 grid grid-cols-1 gap-4 content-start'> 
                     {repos.map((repo: any, i) => (
-                        <Link passHref legacyBehavior href={`/${USERNAME}/${repo.name}/issues`} key={'link' + i}>
-                            <a className='reponame'>{`${repo.name}: \n open issues: ${repo.open_issues_count}`}</a>
+                        <Link legacyBehavior href={`/${USERNAME}/${repo.name}/issues`} className='mt-10' key={'link' + i}>
+                            <a className='reponame text-lg'>{`${i+1}. ${repo.name}: \n open issues: ${repo.open_issues_count}`}<br /></a>
                             {/* <Card openIssues={repo.open_issues_count} className='' onClick={() => { }} key={i}>{repo.name}</Card> */}
                         </Link>
                     ))}
