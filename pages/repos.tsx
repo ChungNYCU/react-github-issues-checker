@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
 import Button from '@/components/Button'
 import Card from '@/components/Card'
+import IssueList from './issueList'
+import React from 'react'
 
 const selectRepo = () => {
 
@@ -14,6 +16,8 @@ const selectRepo = () => {
     const [repos, setRepos] = useState<Object[]>([])
     const [repoIssues, setRepoIssues] = useState<Object[]>([])
     const [isLoading, setLoading] = useState(false)
+    const [issuesDisplay, setIssuesDisplay] = useState(false)
+    const [targetRepo, setTargetRepo] = useState('')
 
     const fetchRepos = async () => {
         setLoading(true)
@@ -42,15 +46,20 @@ const selectRepo = () => {
         fetchRepos()
     }, [])
 
+    const inputRef = useRef(null);
+
     if (isLoading) return <div className='mt-10'>Loading...</div>
 
     if (session) {
         return (
             <section>
                 <h1 className='mt-10 dark:text-blue-500'>Select a repository</h1>
-                <div className='mt-10 grid grid-cols-3 gap-4 content-start'>
+                <div className=' mt-10 grid grid-cols-1 gap-4 content-start'>
                     {repos.map((repo: any, i) => (
-                        <Card openIssues={repo.open_issues_count} className='' onClick={() => { }} key={i}>{repo.name}</Card>
+                        <Link passHref legacyBehavior href={`/${USERNAME}/${repo.name}/issues`} key={'link' + i}>
+                            <a className='reponame'>{`${repo.name}: \n open issues: ${repo.open_issues_count}`}</a>
+                            {/* <Card openIssues={repo.open_issues_count} className='' onClick={() => { }} key={i}>{repo.name}</Card> */}
+                        </Link>
                     ))}
                 </div>
             </section>
