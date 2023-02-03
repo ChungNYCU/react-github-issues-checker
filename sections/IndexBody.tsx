@@ -10,7 +10,7 @@ const IndexBody = () => {
     const router = useRouter()
 
     const directToSelectRepo = () => {
-        router.push('/selectRepo')
+        router.push('/repos')
     }
 
     return (
