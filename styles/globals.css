@@ -32,4 +32,8 @@
     .navbar {
         @apply ease-in duration-300 font-semibold text-gray-400 hover:text-blue-500;
     }
+
+    .reponame {
+        @apply ease-in duration-300 font-semibold hover:text-blue-500;
+    }
 }
