@@ -1,15 +1,14 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
-import { useSession } from 'next-auth/react';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 
-import MenuComponent from '../../../components/Menu';
-import RepositoryList from "../../../components/RepositoryList";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import Link from 'next/link';
+import IssueList from '@/components/issueList';
 
 interface IParams extends ParsedUrlQuery {
   username: string;
@@ -17,8 +16,6 @@ interface IParams extends ParsedUrlQuery {
 };
 
 const Issues = ({ username, reponame }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  // FIXME username empty after refreash
-  console.log(username, reponame)
 
   const [pageNumber, setPageNumber] = useState<number>(1);
   const { GetIssues } = useActions();
@@ -41,14 +38,15 @@ const Issues = ({ username, reponame }: InferGetServerSidePropsType<typeof getSe
     }
   }, [data]);
   // When reach page bottom, get new data
-  useBottomScrollListener(handleOnDocumentBottom);
+  useBottomScrollListener(() => { console.log('BOTTOM!!!') });
 
   return (
     <>
       <div>
-        <div>{data.length}</div>
-        {/* <MenuComponent user={user} /> */}
-        <RepositoryList response={data} />
+        <h1 className='mt-10 dark:text-blue-500'>{`Issue list`}</h1>
+        <h3 className='mt-5'>{reponame}</h3>
+        <IssueList username={username} reponame={reponame}
+          className={''} onClick={() => { }} />
       </div>
     </>
   )
