@@ -1,67 +1,22 @@
-import { useState, useEffect, useRef } from 'react'
-
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
 import Button from '@/components/Button'
-import Card from '@/components/Card'
-import IssueList from './issueList'
 import React from 'react'
+import Repolist from '@/components/repolist'
 
 const selectRepo = () => {
 
     const { data: session } = useSession()
-    const USERNAME = session?.user?.name
-
-    const [repos, setRepos] = useState<Object[]>([])
-    const [repoIssues, setRepoIssues] = useState<Object[]>([])
-    const [isLoading, setLoading] = useState(false)
-    const [issuesDisplay, setIssuesDisplay] = useState(false)
-    const [targetRepo, setTargetRepo] = useState('')
-
-    const fetchRepos = async () => {
-        setLoading(true)
-        fetch(`https://api.github.com/users/${USERNAME}/repos`)
-            .then(response => response.json())
-            .then(data => {
-                setRepos(data)
-                setLoading(false)
-            })
-            .catch(error => console.error(error))
-    }
-
-    const fetchRepoIssues = async (repoName: string) => {
-        setLoading(true)
-        fetch(`https://api.github.com/repos/${USERNAME}/${repoName}/issues`)
-            .then(response => response.json())
-            .then(data => {
-                setRepoIssues(data)
-                setLoading(false)
-            })
-            .catch(error => console.error(error))
-    }
-
-    useEffect(() => {
-        // get user repos
-        fetchRepos()
-    }, [])
-
-    const inputRef = useRef(null);
-
-    if (isLoading) return <div className='mt-10'>Loading...</div>
+    const USERNAME = session?.user?.name!
 
     if (session) {
         return (
             <section>
                 <h1 className='mt-10 dark:text-blue-500'>Select a repository</h1>
                 {/* <div className=' mt-10 grid grid-cols-1 gap-4 content-start'>  */}
-                <div className='mt-10 grid grid-cols-1 gap-4 content-start'> 
-                    {repos.map((repo: any, i) => (
-                        <Link legacyBehavior href={`/${USERNAME}/${repo.name}/issues`} className='mt-10' key={'link' + i}>
-                            <a className='reponame text-lg'>{`${i+1}. ${repo.name}: \n open issues: ${repo.open_issues_count}`}<br /></a>
-                            {/* <Card openIssues={repo.open_issues_count} className='' onClick={() => { }} key={i}>{repo.name}</Card> */}
-                        </Link>
-                    ))}
+                <div className='mt-10 grid grid-cols-1 gap-4 content-start'>
+                    <Repolist username={USERNAME} className={''} onClick={() => { }} />
                 </div>
             </section>
         )
