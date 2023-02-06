@@ -1,7 +1,8 @@
 import { MouseEventHandler, useEffect, useState } from 'react'
-import Card from '@/components/Card';
-import Link from 'next/link';
-import Button from './Button';
+
+import Link from 'next/link'
+
+import RepoCard from '@/components/RepoCard'
 
 type RepoListProps = {
     username: string;
@@ -32,11 +33,12 @@ const Repolist = (props: RepoListProps) => {
     if (isLoading) return <div className='mt-10'>Loading...</div>
 
     return (
-        <div className={`${props.className} mt-3`}>
+        <div className={`${props.className} mt-3 gap-4 content-start`}>
             {repos.map((repo: any, i) => (
-                <Link legacyBehavior href={`/${props.username}/${repo.name}/issues`} className='mt-10' key={'link' + i}>
-                    <a className='reponame text-lg'>{`${i + 1}. ${repo.name}: ${repo.open_issues_count}`}<br /></a>
-                    {/* <Card openIssues={repo.open_issues_count} className='' onClick={() => { }} key={i}>{repo.name}</Card> */}
+                <Link legacyBehavior href={`/${props.username}/${repo.name}/issues`} passHref className='' key={'link' + i}>
+                    <div>
+                        <RepoCard openIssues={repo.open_issues_count} className='mt-3' onClick={() => { }} key={i}>{repo.name}</RepoCard>
+                    </div>
                 </Link>
             ))}
         </div>
