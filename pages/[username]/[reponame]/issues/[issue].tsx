@@ -12,17 +12,26 @@ interface IParams extends ParsedUrlQuery {
   username: string;
   reponame: string;
   issue: string;
-};
+}
+
+enum WorkStatus {
+  Open = 'Open',
+  InProgress = 'InProgress',
+  Done = 'Done',
+  NoLabel = 'NoLabel',
+}
 
 type IssueProps = {
   state: string;
   title: string;
   body: string;
+  labels: Object;
 }
 
 const Issue = ({ username, reponame, issue }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
-  const [issueData, setIssueData] = useState<IssueProps>({ state: '', title: '', body: '', })
+  const [issueData, setIssueData] = useState<IssueProps>({ state: '', title: '', body: '', labels: {} })
+  const [workStatus, setWorkStatus] = useState(WorkStatus.NoLabel)
   const [isLoading, setLoading] = useState(false)
 
   // Function to fetch the repository issues from Github API
@@ -31,9 +40,15 @@ const Issue = ({ username, reponame, issue }: InferGetServerSidePropsType<typeof
     fetch(`https://api.github.com/repos/${username}/${reponame}/issues/${issue}`)
       .then(response => response.json())
       .then(data => {
-
         // Updating the repository issues state with the received data
         setIssueData(data)
+        for (let label of data.labels) {
+          for (let key in label) {
+            if (key === 'name' && label[key] in WorkStatus) {
+              setWorkStatus(label[key])
+            }
+          }
+        }
         setLoading(false)
       })
       .catch(error => console.error(error))
@@ -42,14 +57,13 @@ const Issue = ({ username, reponame, issue }: InferGetServerSidePropsType<typeof
   // UseEffect hook to fetch the repository issues when the page number changes
   useEffect(() => {
     fetchRepoIssue()
-    console.log(issueData)
   }, [])
 
 
   return (
     <>
       <div className='mt-10'>
-        <IssueDetailCard className='' state={issueData.state} title={issueData.title} body={issueData.body} />
+        <IssueDetailCard className='' state={issueData.state} title={issueData.title} body={issueData.body} workStatus={workStatus} />
         {isLoading && <Loading />}
       </div>
     </>
