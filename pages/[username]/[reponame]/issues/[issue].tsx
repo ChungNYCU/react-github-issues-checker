@@ -1,48 +1,64 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { ParsedUrlQuery } from 'querystring';
-// import { Container } from 'semantic-ui-react';
-// import { useActions } from "../../../../hooks/useActions";
-// import { useTypedSelector } from "../../../../hooks/useTypedSelector";
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-// import RepositoryMenu from '../../../../components/RepositoryMenu';
-// import RepositoryHeader from '../../../../components/RepositoryHeader';
-// import RepositoryContent from '../../../../components/RepositoryContent';
 
+import { useEffect, useState } from 'react';
+
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+
+import IssueList from '@/components/issueList'
+import IssueDetailCard from '@/components/IssueDetailCard';
+
+// Defining an interface for the URL parameters
 interface IParams extends ParsedUrlQuery {
   username: string;
-  repo: string;
+  reponame: string;
+  issue: string;
 };
 
-const Repo = ({ username, repo }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  // const { data, error, loading } = useTypedSelector((state) => state.repository);
-  // const { description, topics, readme }: { description: string, topics: string[], readme: string } = data;
-  // const { GetRepository } = useActions();
-  const router = useRouter();
-  // useEffect(() => {
-  //   GetRepository(username, repo);
-  // }, []);
+type IssueProps = {
+  state: string;
+  title: string;
+  body: string;
+}
 
-  // useEffect(() => {
-  //   if (error != null) router.push('/404');
-  // }, [error]);
+const Issue = ({ username, reponame, issue }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+
+  const [issueData, setIssueData] = useState<IssueProps>({ state: '', title: '', body: '', })
+
+  // Function to fetch the repository issues from Github API
+  const fetchRepoIssues = async () => {
+    fetch(`https://api.github.com/repos/${username}/${reponame}/issues/${issue}`)
+      .then(response => response.json())
+      .then(data => {
+
+        // Updating the repository issues state with the received data
+        setIssueData(data)
+      })
+      .catch(error => console.error(error))
+  }
+
+  // UseEffect hook to fetch the repository issues when the page number changes
+  useEffect(() => {
+    fetchRepoIssues()
+    console.log(issueData)
+  }, [])
+
 
   return (
     <>
-      {/* <RepositoryMenu />
-      <RepositoryHeader username={username} repo={repo} data={data} />
-      <Container>
-        <RepositoryContent description={description} topics={topics} readme={readme} />
-      </Container> */}
+      <div className='mt-10'>
+        <IssueDetailCard className='' state={issueData.state} title={issueData.title} body={issueData.body}/>
+      </div>
     </>
   )
 };
 
+// A function that fetches the data needed for the component 'Issues'
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { username, repo } = context.query as IParams;
+  // Extracting the parameters 'username' and 'reponame' from the URL query
+  const { username, reponame, issue } = context.query as IParams
 
-  return { props: { username, repo } };
+  // Returning the extracted parameters as props for the component 'Issues'
+  return { props: { username, reponame, issue } }
 };
 
-
-export default Repo;
+export default Issue
