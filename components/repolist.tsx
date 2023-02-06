@@ -1,4 +1,4 @@
-import { MouseEventHandler, useEffect, useState } from 'react'
+import { useEffect, useState, MouseEventHandler } from 'react'
 
 import Link from 'next/link'
 
@@ -10,11 +10,14 @@ type RepoListProps = {
     onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
+// A functional component that displays a list of GitHub repositories for a given user
 const Repolist = (props: RepoListProps) => {
 
+    // State variables to store the repos and the loading state
     const [repos, setRepos] = useState<Object[]>([])
     const [isLoading, setLoading] = useState(false)
 
+    // Asynchronously fetch the repositories for the given username
     const fetchRepos = async () => {
         setLoading(true)
         fetch(`https://api.github.com/users/${props.username}/repos`)
@@ -26,10 +29,12 @@ const Repolist = (props: RepoListProps) => {
             .catch(error => console.error(error))
     }
 
+    // Fetch the repos when the component is first mounted
     useEffect(() => {
         fetchRepos()
     }, [])
 
+    // If still loading, display a loading message
     if (isLoading) return <div className='mt-10'>Loading...</div>
 
     return (
