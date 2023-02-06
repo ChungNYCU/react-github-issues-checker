@@ -6,13 +6,7 @@ import Link from 'next/link';
 import Button from './Button';
 import IssueCard from './IssueCard';
 import Loading from './Loading';
-
-enum WorkStatus {
-    Open = 'Open',
-    InProgress = 'InProgress',
-    Done = 'Done',
-    NoLabel = 'NoLabel',
-}
+import { WorkStatus } from '@/modules/WorkStatus';
 
 type IssueListProps = {
     username: string;
@@ -101,7 +95,7 @@ const IssueList = (props: IssueListProps) => {
             {repoIssues.map((issue: any, i: number) => (
                 <Link legacyBehavior href={`/${props.username}/${props.reponame}/issues/${issue.number}`} className='' key={'link' + i}>
                     <div>
-                        <IssueCard title={issue.title} body={issue.body} workStatus={getWorkStatus(issue.labels)!} className='mt-2' onClick={() => { }} key={i} />
+                        <IssueCard number={issue.number} title={issue.title} body={issue.body} workStatus={getWorkStatus(issue.labels)!} className='mt-2' onClick={() => { }} key={i} />
                     </div>
                 </Link>
             ))}

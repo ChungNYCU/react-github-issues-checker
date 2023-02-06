@@ -6,6 +6,7 @@ import { ParsedUrlQuery } from 'querystring'
 
 import IssueDetailCard from '@/components/IssueDetailCard';
 import Loading from '@/components/Loading';
+import { WorkStatus } from '@/modules/WorkStatus';
 
 // Defining an interface for the URL parameters
 interface IParams extends ParsedUrlQuery {
@@ -14,23 +15,15 @@ interface IParams extends ParsedUrlQuery {
   issue: string;
 }
 
-enum WorkStatus {
-  Open = 'Open',
-  InProgress = 'InProgress',
-  Done = 'Done',
-  NoLabel = 'NoLabel',
-}
-
 type IssueProps = {
   state: string;
   title: string;
   body: string;
-  labels: Object;
 }
 
 const Issue = ({ username, reponame, issue }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
-  const [issueData, setIssueData] = useState<IssueProps>({ state: '', title: '', body: '', labels: {} })
+  const [issueData, setIssueData] = useState<IssueProps>({ state: '', title: '', body: '' })
   const [workStatus, setWorkStatus] = useState(WorkStatus.NoLabel)
   const [isLoading, setLoading] = useState(false)
 

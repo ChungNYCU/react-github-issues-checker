@@ -1,13 +1,7 @@
 import { useState } from 'react';
 
 import Button from './Button';
-
-enum WorkStatus {
-    Open = 'Open',
-    InProgress = 'InProgress',
-    Done = 'Done',
-    NoLabel = 'NoLabel',
-}
+import { WorkStatus } from '@/modules/WorkStatus';
 
 type IssueDetailCardProps = {
     state: string;
