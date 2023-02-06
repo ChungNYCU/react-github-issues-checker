@@ -2,7 +2,8 @@ import { useEffect, useState, MouseEventHandler } from 'react'
 
 import Link from 'next/link'
 
-import RepoCard from '@/components/RepoCard'
+import RepoCard from './RepoCard'
+import Loading from './Loading';
 
 type RepoListProps = {
     username: string;
@@ -35,7 +36,10 @@ const RepoList = (props: RepoListProps) => {
     }, [])
 
     // If still loading, display a loading message
-    if (isLoading) return <div className='mt-10'>Loading...</div>
+    if (isLoading) return (
+        <Loading />
+    )
+
 
     return (
         <div className={`${props.className} mt-3 gap-4 content-start`}>
