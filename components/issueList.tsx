@@ -4,7 +4,8 @@ import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import Link from 'next/link';
 
 import Button from './Button';
-import IssueCard from '@/components/IssueCard';
+import IssueCard from './IssueCard';
+import Loading from './Loading';
 
 type IssueListProps = {
     username: string;
@@ -24,10 +25,12 @@ const IssueList = (props: IssueListProps) => {
     const [pageCount, setPageCount] = useState<number>(1)
     const [page, setPage] = useState<number>(PER_PAGE * pageCount)
     const [repoIssues, setRepoIssues] = useState<Object[]>([])
+    const [isLoading, setLoading] = useState(false)
     const [loadMore, setLoadMore] = useState<boolean>(true)
 
     // Function to fetch the repository issues from Github API
     const fetchRepoIssues = async () => {
+        setLoading(true)
         fetch(`https://api.github.com/repos/${props.username}/${props.reponame}/issues?per_page=${page}`)
             .then(response => response.json())
             .then(data => {
@@ -37,6 +40,7 @@ const IssueList = (props: IssueListProps) => {
                 }
                 // Updating the repository issues state with the received data
                 setRepoIssues(data)
+                setLoading(false)
                 console.log(`Load page ${pageCount}`, data)
             })
             .catch(error => console.error(error))
@@ -81,7 +85,8 @@ const IssueList = (props: IssueListProps) => {
                     </div>
                 </Link>
             ))}
-            {!loadMore && <div>No more issue</div>}
+            {isLoading && <Loading />}
+            {!loadMore && <div className='mt-5 flex justify-center'>No more issue</div>}
         </div>
     )
 }
