@@ -75,7 +75,7 @@ const IssueList = (props: IssueListProps) => {
                 </div>
             </div>
             {repoIssues.map((issue: any, i: number) => (
-                <Link legacyBehavior href={`/${props.username}/${props.reponame}/${issue.title}`} className='' key={'link' + i}>
+                <Link legacyBehavior href={`/${props.username}/${props.reponame}/issues/${issue.number}`} className='' key={'link' + i}>
                     <div>
                         <IssueCard body={issue.body} className='mt-2' onClick={() => { }} key={i}>{issue.title}</IssueCard>
                     </div>
