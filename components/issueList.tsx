@@ -76,6 +76,7 @@ const IssueList = (props: IssueListProps) => {
                 </div>
                 <div className='flex items-center justify-left '>
                     <Button className='ease-in duration-300 bg-blue-500 text-white px-6 ml-2' onClick={() => { }}>Order</Button>
+                    <Button className='ease-in duration-300 bg-blue-500 text-white px-6 ml-2' onClick={() => { }}>Create Issue</Button>
                 </div>
             </div>
             {repoIssues.map((issue: any, i: number) => (
