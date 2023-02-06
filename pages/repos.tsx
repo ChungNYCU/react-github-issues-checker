@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
 import Button from '@/components/Button'
-import Repolist from '@/components/repolist'
+import RepoList from '@/components/repoList'
 
 const selectRepo = () => {
 
@@ -14,7 +14,7 @@ const selectRepo = () => {
             <section>
                 <h1 className='mt-10 dark:text-blue-500'>Select a repository</h1>
                 <div className='mt-10'>
-                    <Repolist username={USERNAME} className={''} onClick={() => { }} />
+                    <RepoList username={USERNAME} className={''} onClick={() => { }} />
                 </div>
             </section>
         )

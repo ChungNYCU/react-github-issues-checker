@@ -11,7 +11,7 @@ type RepoListProps = {
 }
 
 // A functional component that displays a list of GitHub repositories for a given user
-const Repolist = (props: RepoListProps) => {
+const RepoList = (props: RepoListProps) => {
 
     // State variables to store the repos and the loading state
     const [repos, setRepos] = useState<Object[]>([])
@@ -50,4 +50,4 @@ const Repolist = (props: RepoListProps) => {
     )
 }
 
-export default Repolist
+export default RepoList
