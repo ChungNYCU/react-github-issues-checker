@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react'
 import Button from '@/components/Button'
 import RepoList from '@/components/repoList'
 
-const selectRepo = () => {
+const SelectRepo = () => {
 
     const { data: session } = useSession()
     const USERNAME = session?.user?.name!
@@ -33,4 +33,4 @@ const selectRepo = () => {
 
 }
 
-export default selectRepo
+export default SelectRepo
