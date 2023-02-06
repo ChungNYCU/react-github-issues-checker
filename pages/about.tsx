@@ -14,9 +14,9 @@ const About = () => {
 
             <h5 className="font-semibold mt-20 dark:text-blue-500">基本要求</h5>
             <ul className="mt-5 list-disc">
-                <li>使用 React.js 或基於此的框架,例如 Next.js</li>
-                <li>不限制使用任何第三方 library</li>
-                <li>請使用 Git 版本控制,並將程式碼上傳至 GitHub 上,作業完成後繳交連結即可</li>
+                <li>使用 React.js 或基於此的框架,例如 Next.js <span className='text-green-500 font-bold'>&#x2713;</span></li>
+                <li>不限制使用任何第三方 library <span className='text-green-500 font-bold'>&#x2713;</span></li>
+                <li>請使用 Git 版本控制,並將程式碼上傳至 GitHub 上,作業完成後繳交連結即可 <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>請在 README 內說明如何啟動專案與作業架構的設計</li>
             </ul>
 
@@ -24,7 +24,7 @@ const About = () => {
 
             <h6 className="mt-5 font-semibold">GitHub Login</h6>
             <ul className="mt-1 list-disc">
-                <li>請串接 GitHub OAuth,讓使用者有權限操作 GitHub API</li>
+                <li>請串接 GitHub OAuth,讓使用者有權限操作 GitHub API <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>詳見 GitHub OAuth documentation</li>
                 <li>注意:在登入時需要求正確的 scope</li>
             </ul>
@@ -45,15 +45,15 @@ const About = () => {
 
             <p className="mt-3 font-semibold">列表頁</p>
             <ul className="mt-1 list-disc">
-                <li>第一次只能載入 10 筆</li>
-                <li>每當列表滾到底部時要需要自動發送 API 請求,並載入額外 10 筆,直到沒有更多 Task</li>
+                <li>第一次只能載入 10 筆 <span className='text-green-500 font-bold'>&#x2713;</span></li>
+                <li>每當列表滾到底部時要需要自動發送 API 請求,並載入額外 10 筆,直到沒有更多 Task <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>能夠根據 Task 的狀態 (Open / In Progress / Done) 進行篩選,預設顯示所有 Task</li>
                 <li>能夠根據建立的時間進行排序,預設根據建立時間從新到舊</li>
                 <li>能夠根據 Task 的內容進行搜尋</li>
             </ul>
             <p className="mt-3 font-semibold">Task 詳情頁</p>
             <ul className="mt-1 list-disc">
-                <li>顯示 Task 內容、狀態</li>
+                <li>顯示 Task 內容、狀態 <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>使用者可以在此「編輯」、「刪除」</li>
             </ul>
             <p className="mt-3 font-semibold">新增 / 編輯 Task 時,可以使用 Modal 或跳轉至新的頁面操作</p>
@@ -68,10 +68,10 @@ const About = () => {
             
             <h5 className="font-semibold mt-20 dark:text-blue-500">加分條件</h5>
             <ul className="mt-5 list-disc">
-                <li>使用 TypeScript</li>
-                <li>未使用現成的 GitHub API client (如 Octokit) 串接 GitHub API</li>
+                <li>使用 TypeScript <span className='text-green-500 font-bold'>&#x2713;</span></li>
+                <li>未使用現成的 GitHub API client (如 Octokit) 串接 GitHub API <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>有處理例外狀況 (Error Handling)</li>
-                <li>有 deploy 至線上環境</li>
+                <li>有 deploy 至線上環境 <span className='text-green-500 font-bold'>&#x2713;</span></li>
             </ul>
 
             <h5 className="font-semibold mt-20 dark:text-blue-500">評分項目</h5>
