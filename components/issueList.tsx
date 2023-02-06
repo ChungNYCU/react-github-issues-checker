@@ -7,6 +7,13 @@ import Button from './Button';
 import IssueCard from './IssueCard';
 import Loading from './Loading';
 
+enum WorkStatus {
+    Open = 'Open',
+    InProgress = 'InProgress',
+    Done = 'Done',
+    NoLabel = 'NoLabel',
+}
+
 type IssueListProps = {
     username: string;
     reponame: string;
@@ -27,6 +34,18 @@ const IssueList = (props: IssueListProps) => {
     const [repoIssues, setRepoIssues] = useState<Object[]>([])
     const [isLoading, setLoading] = useState(false)
     const [loadMore, setLoadMore] = useState<boolean>(true)
+
+    const getWorkStatus = (labels: []) => {
+        for (let label of labels) {
+            //@ts-ignore
+            for (let key in label) {
+                if (key === 'name' && label[key] in WorkStatus) {
+                    return label[key]
+                }
+            }
+        }
+        return WorkStatus.NoLabel
+    }
 
     // Function to fetch the repository issues from Github API
     const fetchRepoIssues = async () => {
@@ -70,19 +89,19 @@ const IssueList = (props: IssueListProps) => {
         <div className={`${props.className} mt-3`}>
             <div className='mt-10 mb-5 flex flex-row items-center justify-between'>
                 <div className='flex items-center justify-left '>
-                    <Button className='ease-in duration-300 bg-blue-500 text-white px-6 ml-2' onClick={() => { }}>Open</Button>
-                    <Button className='ease-in duration-300 bg-green-500 text-white px-6 ml-2' onClick={() => { }}>In Progress</Button>
-                    <Button className='ease-in duration-300 bg-red-500 text-white px-6 ml-2' onClick={() => { }}>Done</Button>
+                    <Button className='ease-in duration-300 ml-2 bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => { }}>Open</Button>
+                    <Button className='ease-in duration-300 ml-2 bg-red-300 text-black hover:bg-red-500 hover:text-white px-6' onClick={() => { }}>In Progress</Button>
+                    <Button className='ease-in duration-300 ml-2 bg-green-300 text-black hover:bg-green-500 hover:text-white px-6' onClick={() => { }}>Done</Button>
                 </div>
                 <div className='flex items-center justify-left '>
-                    <Button className='ease-in duration-300 bg-blue-500 text-white px-6 ml-2' onClick={() => { }}>Order</Button>
-                    <Button className='ease-in duration-300 bg-blue-500 text-white px-6 ml-2' onClick={() => { }}>Create Issue</Button>
+                    <Button className='ease-in duration-300 ml-2 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>Order</Button>
+                    <Button className='ease-in duration-300 ml-2 bg-yellow-300 text-black hover:bg-yellow-500 hover:text-white px-6' onClick={() => { }}>Create Issue</Button>
                 </div>
             </div>
             {repoIssues.map((issue: any, i: number) => (
                 <Link legacyBehavior href={`/${props.username}/${props.reponame}/issues/${issue.number}`} className='' key={'link' + i}>
                     <div>
-                        <IssueCard body={issue.body} className='mt-2' onClick={() => { }} key={i}>{issue.title}</IssueCard>
+                        <IssueCard title={issue.title} body={issue.body} workStatus={getWorkStatus(issue.labels)!} className='mt-2' onClick={() => { }} key={i} />
                     </div>
                 </Link>
             ))}
