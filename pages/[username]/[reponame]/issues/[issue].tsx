@@ -56,7 +56,8 @@ const Issue = ({ username, reponame, issue }: InferGetServerSidePropsType<typeof
   return (
     <>
       <div className='mt-10'>
-        <IssueDetailCard className='' state={issueData.state} title={issueData.title} body={issueData.body} workStatus={workStatus} />
+        <IssueDetailCard className='' username={username} reponame={reponame} issue={issue}
+          state={issueData.state} title={issueData.title} body={issueData.body} workStatus={workStatus} />
         {isLoading && <Loading />}
       </div>
     </>
