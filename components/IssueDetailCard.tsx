@@ -41,7 +41,7 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
         })
             .then((response) => response.json())
             .then((json) => console.log(json));
-        Router.back()
+        Router.push(`/${props.username}/${props.reponame}/issues`)
     }
 
     return (
