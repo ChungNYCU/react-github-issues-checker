@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 
 import Button from '@/components/Button'
 
-
 const IndexBody = () => {
 
     const { data: session } = useSession()
