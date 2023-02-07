@@ -8,7 +8,7 @@ import '@/styles/globals.css'
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <ThemeProvider attribute='class'>
-      <SessionProvider>
+      <SessionProvider session={session}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
