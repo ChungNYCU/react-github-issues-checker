@@ -1,12 +1,13 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 
-import IssueDetailCard from '@/components/IssueDetailCard';
-import Loading from '@/components/Loading';
-import { WorkStatus } from '@/modules/WorkStatus';
+import IssueDetailCard from '@/components/IssueDetailCard'
+import Loading from '@/components/Loading'
+import { fetchRepoIssue } from '@/components/fetchGitHubApi'
+import { WorkStatus } from '@/modules/WorkStatus'
 
 // Defining an interface for the URL parameters
 interface IParams extends ParsedUrlQuery {
@@ -27,31 +28,10 @@ const Issue = ({ username, reponame, issue }: InferGetServerSidePropsType<typeof
   const [workStatus, setWorkStatus] = useState(WorkStatus.NoLabel)
   const [isLoading, setLoading] = useState(false)
 
-  // Function to fetch the repository issues from Github API
-  const fetchRepoIssue = async () => {
-    setLoading(true)
-    fetch(`https://api.github.com/repos/${username}/${reponame}/issues/${issue}`)
-      .then(response => response.json())
-      .then(data => {
-        // Updating the repository issues state with the received data
-        setIssueData(data)
-        for (let label of data.labels) {
-          for (let key in label) {
-            if (key === 'name' && label[key] in WorkStatus) {
-              setWorkStatus(label[key])
-            }
-          }
-        }
-        setLoading(false)
-      })
-      .catch(error => console.error(error))
-  }
-
   // UseEffect hook to fetch the repository issues when the page number changes
   useEffect(() => {
-    fetchRepoIssue()
+    fetchRepoIssue(username, reponame, issue, setIssueData, setWorkStatus, setLoading)
   }, [])
-
 
   return (
     <>

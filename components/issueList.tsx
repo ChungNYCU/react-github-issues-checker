@@ -1,12 +1,13 @@
 import { useEffect, useState, MouseEventHandler } from 'react'
-import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener'
 
-import Link from 'next/link';
+import Link from 'next/link'
 
-import Button from './Button';
-import IssueCard from './IssueCard';
-import Loading from './Loading';
-import { WorkStatus } from '@/modules/WorkStatus';
+import { fetchRepoIssues } from './fetchGitHubApi'
+import Button from './Button'
+import IssueCard from './IssueCard'
+import Loading from './Loading'
+import { WorkStatus } from '@/modules/WorkStatus'
 
 type IssueListProps = {
     username: string;
@@ -41,24 +42,6 @@ const IssueList = (props: IssueListProps) => {
         return WorkStatus.NoLabel
     }
 
-    // Function to fetch the repository issues from Github API
-    const fetchRepoIssues = async () => {
-        setLoading(true)
-        fetch(`https://api.github.com/repos/${props.username}/${props.reponame}/issues?per_page=${page}`)
-            .then(response => response.json())
-            .then(data => {
-                // If number of issues received is less than the requested page, it means there are no more issues to be loaded
-                if (data.length < page) {
-                    setLoadMore(false)
-                }
-                // Updating the repository issues state with the received data
-                setRepoIssues(data)
-                setLoading(false)
-                console.log(`Load page ${pageCount}`, data)
-            })
-            .catch(error => console.error(error))
-    }
-
     // UseBottomScrollListener hook to detect when the user has scrolled to the bottom of the page
     useBottomScrollListener(() => {
         // If there are still issues to be loaded, increase the page count to load the next page
@@ -76,7 +59,7 @@ const IssueList = (props: IssueListProps) => {
 
     // UseEffect hook to fetch the repository issues when the page number changes
     useEffect(() => {
-        fetchRepoIssues()
+        fetchRepoIssues(props.username, props.reponame, page, setRepoIssues, setLoadMore, setLoading)
     }, [page])
 
     return (

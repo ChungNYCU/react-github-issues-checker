@@ -2,8 +2,9 @@ import { useEffect, useState, MouseEventHandler } from 'react'
 
 import Link from 'next/link'
 
+import { fetchRepos } from './fetchGitHubApi'
 import RepoCard from './RepoCard'
-import Loading from './Loading';
+import Loading from './Loading'
 
 type RepoListProps = {
     username: string;
@@ -18,28 +19,15 @@ const RepoList = (props: RepoListProps) => {
     const [repos, setRepos] = useState<Object[]>([])
     const [isLoading, setLoading] = useState(false)
 
-    // Asynchronously fetch the repositories for the given username
-    const fetchRepos = async () => {
-        setLoading(true)
-        fetch(`https://api.github.com/users/${props.username}/repos`)
-            .then(response => response.json())
-            .then(data => {
-                setRepos(data)
-                setLoading(false)
-            })
-            .catch(error => console.error(error))
-    }
-
     // Fetch the repos when the component is first mounted
     useEffect(() => {
-        fetchRepos()
+        fetchRepos(props.username, setRepos, setLoading)
     }, [])
 
     // If still loading, display a loading message
     if (isLoading) return (
         <Loading />
     )
-
 
     return (
         <div className={`${props.className} mt-3 gap-4 content-start`}>

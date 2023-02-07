@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-import Router from 'next/router';
-import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react'
 
-import Button from './Button';
+import { closeIssue } from './fetchGitHubApi'
+import Button from './Button'
 import MoreOptionDropDown from './MoreOptionDropDown'
-import { WorkStatus } from '@/modules/WorkStatus';
+import { WorkStatus } from '@/modules/WorkStatus'
 
 type IssueDetailCardProps = {
     username: string;
@@ -27,21 +27,8 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
         setToken(session?.accessToken)
     }, [])
 
-
-    const closeIssue = async () => {
-        fetch(`https://api.github.com/repos/${props.username}/${props.reponame}/issues/${props.issue}`, {
-            method: 'PATCH',
-            body: JSON.stringify({
-                state: 'closed',
-            }),
-            headers: {
-                'Authorization': `bearer ${token}`,
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then((response) => response.json())
-            .then((json) => console.log(json));
-        Router.push(`/${props.username}/${props.reponame}/issues`)
+    const handleDeleteButtonClick = () => {
+        closeIssue(props.username, props.reponame, props.issue, token)
     }
 
     return (
@@ -58,7 +45,7 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
                         {props.state === 'open' && props.workStatus === WorkStatus.NoLabel && <Button className='ease-in duration-300 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
                     </div>
                 </div>
-                <MoreOptionDropDown onDeleteButtonClick={closeIssue} />
+                <MoreOptionDropDown onDeleteButtonClick={handleDeleteButtonClick} />
             </div>
             <div className='m-10'>
                 <h4 className='mt-10 font-bold'>{`${props.title}`}</h4>
