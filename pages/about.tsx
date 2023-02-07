@@ -31,7 +31,7 @@ const About = () => {
 
             <h6 className="mt-5 font-semibold">Task Management</h6>
             <ul className="mt-1 list-disc">
-                <li>請將 GitHub Issue 作為 Task,以 GitHub Issue 實作, 並將 close Issue 視為刪除 Task</li>
+                <li>請將 GitHub Issue 作為 Task,以 GitHub Issue 實作, 並將 close Issue 視為刪除 Task <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>你可能會需要 GitHub Issue documentation 或 GitHub GraphQL API Explorer</li>
             </ul>
 
@@ -65,7 +65,7 @@ const About = () => {
 
             <h5 className="font-semibold mt-20 dark:text-blue-500">範例</h5>
             <Image className='mt-5' src={'/example.png'} alt={'example'} width="1491" height="924"></Image>
-            
+
             <h5 className="font-semibold mt-20 dark:text-blue-500">加分條件</h5>
             <ul className="mt-5 list-disc">
                 <li>使用 TypeScript <span className='text-green-500 font-bold'>&#x2713;</span></li>
