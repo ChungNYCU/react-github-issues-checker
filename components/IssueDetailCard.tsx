@@ -49,20 +49,19 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
             <div className='m-10 flex items-center justify-between'>
                 <div className='flex items-center justify-start'>
                     <div>
-                        {props.state === 'open' && <Button className='mr-2 ease-in duration-300 bg-green-300 text-black hover:bg-green-500 hover:text-white px-6' onClick={() => { }}>Active</Button>}
                         {props.state === 'closed' && <Button className='mr-2 ease-in duration-300 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>Closed</Button>}
                     </div>
                     <div>
-                        {props.workStatus === WorkStatus.Open && <Button className='ease-in duration-300 bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
-                        {props.workStatus === WorkStatus.InProgress && <Button className='ease-in duration-300 bg-red-300 text-black hover:bg-red-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
-                        {props.workStatus === WorkStatus.Done && <Button className='ease-in duration-300 bg-green-300 text-black hover:bg-green-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
-                        {props.workStatus === WorkStatus.NoLabel && <Button className='ease-in duration-300 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
+                        {props.state === 'open' && props.workStatus === WorkStatus.Open && <Button className='ease-in duration-300 bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
+                        {props.state === 'open' && props.workStatus === WorkStatus.InProgress && <Button className='ease-in duration-300 bg-red-300 text-black hover:bg-red-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
+                        {props.state === 'open' && props.workStatus === WorkStatus.Done && <Button className='ease-in duration-300 bg-green-300 text-black hover:bg-green-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
+                        {props.state === 'open' && props.workStatus === WorkStatus.NoLabel && <Button className='ease-in duration-300 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
                     </div>
                 </div>
                 <MoreOptionDropDown onDeleteButtonClick={closeIssue} />
             </div>
             <div className='m-10'>
-                <h4 className='mt-10 font-bold'>{`${props.title} (${props.state})`}</h4>
+                <h4 className='mt-10 font-bold'>{`${props.title}`}</h4>
                 <p className='mt-5'>{props.body}</p>
             </div>
             <div></div>
