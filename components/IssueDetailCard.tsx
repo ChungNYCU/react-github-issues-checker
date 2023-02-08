@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react'
 import { closeIssue } from './fetchGitHubApi'
 import Button from './Button'
 import MoreOptionDropDown from './MoreOptionDropDown'
+import WorkStatusDropDown from './WorkStatusDropDown'
 import { WorkStatus } from '@/modules/WorkStatus'
 
 type IssueDetailCardProps = {
@@ -35,14 +36,9 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
         <div className='m-2 bg-gray-200  dark:bg-gray-700 border dark:border-gray-700 rounded-lg'>
             <div className='m-10 flex items-center justify-between'>
                 <div className='flex items-center justify-start'>
+                    {props.state === 'open' && <WorkStatusDropDown workStatus={props.workStatus} />}
                     <div>
                         {props.state === 'closed' && <Button className='mr-2 ease-in duration-300 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>Closed</Button>}
-                    </div>
-                    <div>
-                        {props.state === 'open' && props.workStatus === WorkStatus.Open && <Button className='ease-in duration-300 bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
-                        {props.state === 'open' && props.workStatus === WorkStatus.InProgress && <Button className='ease-in duration-300 bg-red-300 text-black hover:bg-red-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
-                        {props.state === 'open' && props.workStatus === WorkStatus.Done && <Button className='ease-in duration-300 bg-green-300 text-black hover:bg-green-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
-                        {props.state === 'open' && props.workStatus === WorkStatus.NoLabel && <Button className='ease-in duration-300 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>{props.workStatus}</Button>}
                     </div>
                 </div>
                 <MoreOptionDropDown onDeleteButtonClick={handleDeleteButtonClick} />
