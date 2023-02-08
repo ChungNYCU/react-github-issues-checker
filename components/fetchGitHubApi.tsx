@@ -51,13 +51,11 @@ export const fetchRepoIssues = async (username: string, reponame: string, page: 
         .catch(error => console.error(error))
 }
 
-// Function to update issue's state to 'closed', the operation equals to delete task, ref in file IssueDetailCard.tsx
-export const closeIssue = async (username: string, reponame: string, issue: number, token: string,) => {
+// Function to update issue's state depend on reqBody, it could be update either state, label, title, or body, ref in file IssueDetailCard.tsx
+export const updateIssue = async (username: string, reponame: string, issue: number, token: string, reqBody: object) => {
     fetch(`https://api.github.com/repos/${username}/${reponame}/issues/${issue}`, {
         method: 'PATCH',
-        body: JSON.stringify({
-            state: 'closed',
-        }),
+        body: JSON.stringify(reqBody),
         headers: {
             'Authorization': `bearer ${token}`,
             'Content-type': 'application/json; charset=UTF-8',
@@ -65,6 +63,12 @@ export const closeIssue = async (username: string, reponame: string, issue: numb
     })
         .then((response) => response.json())
         .then((json) => console.log(json));
-    Router.push(`/${username}/${reponame}/issues`)
+
+    //@ts-ignore
+    if (reqBody.state) {
+        Router.push(`/${username}/${reponame}/issues`)
+    } else {
+        Router.reload()
+    }
 }
 
