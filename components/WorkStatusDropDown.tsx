@@ -1,22 +1,19 @@
-import { Fragment } from 'react'
+import { Fragment, MouseEventHandler } from 'react'
 import { Menu, Transition } from '@headlessui/react'
+
 import { ChevronDownIcon, DocumentIcon, DocumentTextIcon, DocumentCheckIcon } from '@heroicons/react/20/solid'
 import { WorkStatus } from '@/modules/WorkStatus'
 
 type WorkStatusDropDownProps = {
-    // state: string;
-    // title: string;
-    // body: string;
     workStatus: string;
-    // className: string;
-    // onClick: MouseEventHandler;
+    onOpenStatusButtonClick: MouseEventHandler<HTMLButtonElement>;
+    onInProgressStatusButtonClick: MouseEventHandler<HTMLButtonElement>;
+    onDoneStatusButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 const classNames = (...classes: string[]) => {
     return classes.filter(Boolean).join(' ')
 }
-
-
 
 const WorkStatusDropDown = (props: WorkStatusDropDownProps) => {
     let menuButtonClass = ''
@@ -62,41 +59,26 @@ const WorkStatusDropDown = (props: WorkStatusDropDownProps) => {
                     <div className="py-1">
                         <Menu.Item>
                             {({ active }) => (
-                                <a
-                                    href="#"
-                                    className={classNames(
-                                        active ? 'bg-gray-300 text-blue-500' : 'bg-gray-100 text-blue-500',
-                                        'flex flex-row justify-start items-center px-4 py-2 text-sm ease-in duration-300'
-                                    )}
-                                >
+                                <button onClick={props.onOpenStatusButtonClick} className={classNames(active ? 'bg-gray-300 text-blue-500' : 'bg-gray-100 text-blue-500',
+                                    'flex flex-row justify-start items-center w-full px-4 py-2 text-left text-sm ease-in duration-300')}>
                                     <DocumentIcon className="h-4 w-4 mr-2" aria-hidden="true" /> {WorkStatus.Open}
-                                </a>
+                                </button>
                             )}
                         </Menu.Item>
                         <Menu.Item>
                             {({ active }) => (
-                                <a
-                                    href="#"
-                                    className={classNames(
-                                        active ? 'bg-gray-300 text-red-500' : 'bg-gray-100 text-red-500',
-                                        'flex flex-row justify-start items-center px-4 py-2 text-sm ease-in duration-300'
-                                    )}
-                                >
+                                <button onClick={props.onInProgressStatusButtonClick} className={classNames(active ? 'bg-gray-300 text-red-500' : 'bg-gray-100 text-red-500',
+                                    'flex flex-row justify-start items-center w-full px-4 py-2 text-left text-sm ease-in duration-300')}>
                                     <DocumentTextIcon className="h-4 w-4 mr-2" aria-hidden="true" /> {WorkStatus.InProgress}
-                                </a>
+                                </button>
                             )}
                         </Menu.Item>
                         <Menu.Item>
                             {({ active }) => (
-                                <a
-                                    href="#"
-                                    className={classNames(
-                                        active ? 'bg-gray-300 text-green-500' : 'bg-gray-100 text-green-500',
-                                        'flex flex-row justify-start items-center px-4 py-2 text-sm ease-in duration-300'
-                                    )}
-                                >
+                                <button onClick={props.onDoneStatusButtonClick} className={classNames(active ? 'bg-gray-300 text-green-500' : 'bg-gray-100 text-green-500',
+                                    'flex flex-row justify-start items-center w-full px-4 py-2 text-left text-sm ease-in duration-300')}>
                                     <DocumentCheckIcon className="h-4 w-4 mr-2" aria-hidden="true" /> {WorkStatus.Done}
-                                </a>
+                                </button>
                             )}
                         </Menu.Item>
                     </div>
