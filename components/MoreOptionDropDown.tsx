@@ -2,11 +2,11 @@ import { Fragment, MouseEventHandler } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid'
 
-const classNames = (...classes: string[]) => { return classes.filter(Boolean).join(' ') }
-
 type MoreOptionDropDownProps = {
     onDeleteButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
+
+const classNames = (...classes: string[]) => { return classes.filter(Boolean).join(' ') }
 
 const MoreOptionDropDown = (props: MoreOptionDropDownProps) => {
     return (
