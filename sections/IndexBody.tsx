@@ -22,9 +22,9 @@ const IndexBody = () => {
                 and update the status of Task.
             </p>
             <div className='flex items-center justify-between'>
-                {!session && <Button className='ease-in duration-300 bg-blue-500 text-white px-6' onClick={() => signIn()}>Login</Button>}
-                {session && <Button className='ease-in duration-300 bg-blue-500 text-white px-6' onClick={directToReposPage}>Start</Button>}
-                {session && <Button className='ease-in duration-300 bg-red-500 text-white px-6' onClick={() => signOut()}>Logout</Button>}
+                {!session && <Button className='bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => signIn()}>Login</Button>}
+                {session && <Button className='bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={directToReposPage}>Start</Button>}
+                {session && <Button className='bg-red-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => signOut()}>Logout</Button>}
             </div>
         </section>
     )

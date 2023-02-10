@@ -41,7 +41,7 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
                 <div className='flex items-center justify-start'>
                     <div>
                         <Button
-                            className={'inline-flex w-full justify-center rounded-md border dark:border-gray-700 px-2 py-2 ease-in duration-300 bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-500'}
+                            className={'inline-flex w-full justify-center rounded-md border dark:border-gray-700 px-2 py-2 bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-500'}
                             onClick={hanedleBackButtonClick}>
                             <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
                         </Button>
