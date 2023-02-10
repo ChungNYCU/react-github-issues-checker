@@ -9,7 +9,7 @@ type ButtonProps = {
 const Button = (props: ButtonProps) => {
     return (
         <button
-            className={`p-2 rounded-md hover:ring-2 hover:ring-gray-300 ${props.className}`}
+            className={`p-2 rounded-md hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-700 ${props.className}`}
             onClick={props.onClick}>
             {props.children}
         </button>
