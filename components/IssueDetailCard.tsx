@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import { useSession } from 'next-auth/react'
+import Router from 'next/router'
+import { ArrowLeftIcon } from '@heroicons/react/20/solid'
 
 import { updateIssue } from './fetchGitHubApi'
 import Button from './Button'
@@ -32,17 +34,28 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
         updateIssue(props.username, props.reponame, props.issue, token, ReqBody)
     }
 
+    const hanedleBackButtonClick = () => {
+        Router.back()
+    }
+
     return (
         <div className='m-2 bg-gray-200  dark:bg-gray-700 border dark:border-gray-700 rounded-lg'>
             <div className='m-10 flex items-center justify-between'>
                 <div className='flex items-center justify-start'>
+                    <div>
+                        <Button
+                            className={'inline-flex w-full justify-center rounded-md border dark:border-gray-700 px-2 py-2 ease-in duration-300 bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-500'}
+                            onClick={hanedleBackButtonClick}>
+                            <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
+                        </Button>
+                    </div>
                     {props.state === 'open' &&
                         <WorkStatusDropDown workStatus={props.workStatus}
                             onOpenStatusButtonClick={() => { handleStatusButtonClick({ labels: [WorkStatus.Open] }) }}
                             onInProgressStatusButtonClick={() => { handleStatusButtonClick({ labels: [WorkStatus.InProgress] }) }}
                             onDoneStatusButtonClick={() => { handleStatusButtonClick({ labels: [WorkStatus.Done] }) }} />}
                     <div>
-                        {props.state === 'closed' && <Button className='mr-2 ease-in duration-300 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>Closed</Button>}
+                        {props.state === 'closed' && <Button className='ml-2 ease-in duration-300 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>Closed</Button>}
                     </div>
                 </div>
                 <MoreOptionDropDown onDeleteButtonClick={() => { handleStatusButtonClick({ state: 'closed' }) }} />
