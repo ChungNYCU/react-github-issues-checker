@@ -28,23 +28,7 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
         setToken(session?.accessToken)
     }, [])
 
-    const handleOpenStatusButtonClick = () => {
-        const ReqBody = { labels: [WorkStatus.Open] }
-        updateIssue(props.username, props.reponame, props.issue, token, ReqBody)
-    }
-
-    const handleInProgressStatusButtonClick = () => {
-        const ReqBody = { labels: [WorkStatus.InProgress] }
-        updateIssue(props.username, props.reponame, props.issue, token, ReqBody)
-    }
-
-    const handleDoneStatusButtonClick = () => {
-        const ReqBody = { labels: [WorkStatus.Done] }
-        updateIssue(props.username, props.reponame, props.issue, token, ReqBody)
-    }
-
-    const handleDeleteButtonClick = () => {
-        const ReqBody = { state: 'closed' }
+    const handleStatusButtonClick = (ReqBody: any) => {
         updateIssue(props.username, props.reponame, props.issue, token, ReqBody)
     }
 
@@ -54,12 +38,14 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
                 <div className='flex items-center justify-start'>
                     {props.state === 'open' &&
                         <WorkStatusDropDown workStatus={props.workStatus}
-                            onOpenStatusButtonClick={handleOpenStatusButtonClick} onInProgressStatusButtonClick={handleInProgressStatusButtonClick} onDoneStatusButtonClick={handleDoneStatusButtonClick} />}
+                            onOpenStatusButtonClick={() => { handleStatusButtonClick({ labels: [WorkStatus.Open] }) }}
+                            onInProgressStatusButtonClick={() => { handleStatusButtonClick({ labels: [WorkStatus.InProgress] }) }}
+                            onDoneStatusButtonClick={() => { handleStatusButtonClick({ labels: [WorkStatus.Done] }) }} />}
                     <div>
                         {props.state === 'closed' && <Button className='mr-2 ease-in duration-300 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>Closed</Button>}
                     </div>
                 </div>
-                <MoreOptionDropDown onDeleteButtonClick={handleDeleteButtonClick} />
+                <MoreOptionDropDown onDeleteButtonClick={() => { handleStatusButtonClick({ state: 'closed' }) }} />
             </div>
             <div className='m-10'>
                 <h4 className='mt-10 font-bold'>{`#${props.issue} ${props.title}`}</h4>
