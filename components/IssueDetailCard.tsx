@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { ArrowLeftIcon } from '@heroicons/react/20/solid'
 
-import { updateIssue, hanedleBackButtonClick } from './fetchGitHubApi'
+import { updateIssue, handleBackButtonClick } from './fetchGitHubApi'
 import Button from './Button'
 import MoreOptionDropDown from './MoreOptionDropDown'
 import WorkStatusDropDown from './WorkStatusDropDown'
@@ -42,7 +42,7 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
                     <div>
                         <Button
                             className={'inline-flex w-full justify-center rounded-md border dark:border-gray-700 px-2 py-2 bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-500'}
-                            onClick={hanedleBackButtonClick}>
+                            onClick={handleBackButtonClick}>
                             <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
                         </Button>
                     </div>

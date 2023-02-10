@@ -2,7 +2,7 @@ import { useEffect, useState, MouseEventHandler } from 'react'
 
 import Link from 'next/link'
 
-import { fetchRepos, hanedleBackButtonClick } from './fetchGitHubApi'
+import { fetchRepos, handleBackButtonClick } from './fetchGitHubApi'
 import RepoCard from './RepoCard'
 import Loading from './Loading'
 import Button from './Button'
@@ -38,7 +38,7 @@ const RepoList = (props: RepoListProps) => {
                     <div>
                         <Button
                             className={'ml-2 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-2 py-2'}
-                            onClick={hanedleBackButtonClick}>
+                            onClick={handleBackButtonClick}>
                             <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
                         </Button>
                     </div>

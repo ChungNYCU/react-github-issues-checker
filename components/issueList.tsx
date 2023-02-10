@@ -4,7 +4,7 @@ import { useBottomScrollListener } from 'react-bottom-scroll-listener'
 import Link from 'next/link'
 import { ArrowLeftIcon } from '@heroicons/react/20/solid'
 
-import { fetchRepoIssues, hanedleBackButtonClick } from './fetchGitHubApi'
+import { fetchRepoIssues, handleBackButtonClick } from './fetchGitHubApi'
 import Button from './Button'
 import IssueCard from './IssueCard'
 import Loading from './Loading'
@@ -27,6 +27,7 @@ const IssueList = (props: IssueListProps) => {
     // State variables to keep track of the page number and issues loaded
     const [pageCount, setPageCount] = useState<number>(1)
     const [page, setPage] = useState<number>(PER_PAGE * pageCount)
+    const [labels, setLabels] = useState<string>('')
     const [repoIssues, setRepoIssues] = useState<Object[]>([])
     const [isLoading, setLoading] = useState(false)
     const [loadMore, setLoadMore] = useState<boolean>(true)
@@ -42,6 +43,8 @@ const IssueList = (props: IssueListProps) => {
         }
         return WorkStatus.NoLabel
     }
+
+    //const handleFilterButtonClick = () => { }
 
     // UseBottomScrollListener hook to detect when the user has scrolled to the bottom of the page
     useBottomScrollListener(() => {
@@ -60,8 +63,8 @@ const IssueList = (props: IssueListProps) => {
 
     // UseEffect hook to fetch the repository issues when the page number changes
     useEffect(() => {
-        fetchRepoIssues(props.username, props.reponame, page, setRepoIssues, setLoadMore, setLoading)
-    }, [page])
+        fetchRepoIssues(props.username, props.reponame, page, labels, setRepoIssues, setLoadMore, setLoading)
+    }, [page, labels])
 
 
     return (
@@ -71,7 +74,7 @@ const IssueList = (props: IssueListProps) => {
                     <div>
                         <Button
                             className={'ml-2 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-2 py-2'}
-                            onClick={hanedleBackButtonClick}>
+                            onClick={handleBackButtonClick}>
                             <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
                         </Button>
                     </div>
