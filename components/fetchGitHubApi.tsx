@@ -52,7 +52,7 @@ export const fetchRepoIssues = async (username: string, reponame: string, page: 
 }
 
 // Function to update issue's state depend on reqBody, it could be update either state, label, title, or body, ref in file IssueDetailCard.tsx
-export const updateIssue = async (username: string, reponame: string, issue: number, token: string, reqBody: object) => {
+export const updateIssue = async (username: string, reponame: string, issue: number, token: string, reqBody: any) => {
     fetch(`https://api.github.com/repos/${username}/${reponame}/issues/${issue}`, {
         method: 'PATCH',
         body: JSON.stringify(reqBody),
@@ -64,7 +64,6 @@ export const updateIssue = async (username: string, reponame: string, issue: num
         .then((response) => response.json())
         .then((json) => console.log(json));
 
-    //@ts-ignore
     if (reqBody.state) {
         Router.push(`/${username}/${reponame}/issues`)
     } else {
