@@ -69,3 +69,6 @@ export const updateIssue = async (username: string, reponame: string, issue: num
     }
 }
 
+export const hanedleBackButtonClick = () => {
+    Router.back()
+}

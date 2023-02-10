@@ -2,10 +2,9 @@ import { useEffect, useState, MouseEventHandler } from 'react'
 import { useBottomScrollListener } from 'react-bottom-scroll-listener'
 
 import Link from 'next/link'
-import Router from 'next/router'
 import { ArrowLeftIcon } from '@heroicons/react/20/solid'
 
-import { fetchRepoIssues } from './fetchGitHubApi'
+import { fetchRepoIssues, hanedleBackButtonClick } from './fetchGitHubApi'
 import Button from './Button'
 import IssueCard from './IssueCard'
 import Loading from './Loading'
@@ -64,9 +63,6 @@ const IssueList = (props: IssueListProps) => {
         fetchRepoIssues(props.username, props.reponame, page, setRepoIssues, setLoadMore, setLoading)
     }, [page])
 
-    const hanedleBackButtonClick = () => {
-        Router.back()
-    }
 
     return (
         <div className={`${props.className} mt-3`}>

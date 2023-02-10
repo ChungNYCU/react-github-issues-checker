@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 
 import { useSession } from 'next-auth/react'
-import Router from 'next/router'
 import { ArrowLeftIcon } from '@heroicons/react/20/solid'
 
-import { updateIssue } from './fetchGitHubApi'
+import { updateIssue, hanedleBackButtonClick } from './fetchGitHubApi'
 import Button from './Button'
 import MoreOptionDropDown from './MoreOptionDropDown'
 import WorkStatusDropDown from './WorkStatusDropDown'
@@ -34,9 +33,7 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
         updateIssue(props.username, props.reponame, props.issue, token, ReqBody)
     }
 
-    const hanedleBackButtonClick = () => {
-        Router.back()
-    }
+
 
     return (
         <div className='m-2 bg-gray-200  dark:bg-gray-700 border dark:border-gray-700 rounded-lg'>

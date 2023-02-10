@@ -2,9 +2,11 @@ import { useEffect, useState, MouseEventHandler } from 'react'
 
 import Link from 'next/link'
 
-import { fetchRepos } from './fetchGitHubApi'
+import { fetchRepos, hanedleBackButtonClick } from './fetchGitHubApi'
 import RepoCard from './RepoCard'
 import Loading from './Loading'
+import Button from './Button'
+import { ArrowLeftIcon } from '@heroicons/react/20/solid'
 
 type RepoListProps = {
     username: string;
@@ -31,6 +33,24 @@ const RepoList = (props: RepoListProps) => {
 
     return (
         <div className={`${props.className} mt-3 gap-4 content-start`}>
+            <div className='mt-10 mb-5 flex flex-row items-center justify-between'>
+                <div className='flex items-center justify-left '>
+                    <div>
+                        <Button
+                            className={'ease-in duration-300 ml-2 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-2 py-2'}
+                            onClick={hanedleBackButtonClick}>
+                            <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
+                        </Button>
+                    </div>
+                    <Button className='ease-in duration-300 ml-2 bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => { }}>Open</Button>
+                    <Button className='ease-in duration-300 ml-2 bg-red-300 text-black hover:bg-red-500 hover:text-white px-6' onClick={() => { }}>In Progress</Button>
+                    <Button className='ease-in duration-300 ml-2 bg-green-300 text-black hover:bg-green-500 hover:text-white px-6' onClick={() => { }}>Done</Button>
+                </div>
+                <div className='flex items-center justify-left '>
+                    <Button className='ease-in duration-300 ml-2 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>Order</Button>
+                    <Button className='ease-in duration-300 ml-2 bg-yellow-300 text-black hover:bg-yellow-500 hover:text-white px-6' onClick={() => { }}>Create Issue</Button>
+                </div>
+            </div>
             {repos.map((repo: any, i) => (
                 <Link legacyBehavior href={`/${props.username}/${repo.name}/issues`} passHref className='' key={'link' + i}>
                     <div>
