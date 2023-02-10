@@ -39,7 +39,7 @@ const WorkStatusDropDown = (props: WorkStatusDropDownProps) => {
 
     return (
         <Menu as="div" className="relative inline-block text-left">
-            <div>
+            <div className='ml-2'>
                 <Menu.Button className={menuButtonClass}>
                     {props.workStatus}
                     <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />

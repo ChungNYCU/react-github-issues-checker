@@ -13,7 +13,7 @@ const MoreOptionDropDown = (props: MoreOptionDropDownProps) => {
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
-                <Menu.Button className="inline-flex w-full justify-center rounded-md border dark:border-gray-700 px-4 py-2 ease-in duration-300 bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-500">
+                <Menu.Button className="inline-flex w-full justify-center rounded-md border dark:border-gray-700 px-2 py-2 ease-in duration-300 bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-500">
                     <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
                 </Menu.Button>
             </div>
