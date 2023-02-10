@@ -46,7 +46,6 @@ export const fetchRepoIssues = async (username: string, reponame: string, page: 
             // Updating the repository issues state with the received data
             setData(data)
             setLoading(false)
-            console.log(`Load page ${page / 10}`, data)
         })
         .catch(error => console.error(error))
 }
