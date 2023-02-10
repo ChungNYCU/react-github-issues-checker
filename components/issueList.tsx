@@ -77,7 +77,7 @@ const IssueList = (props: IssueListProps) => {
                 <div className='flex items-center justify-left '>
                     <div>
                         <Button
-                            className={'ml-2 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-2 py-2'}
+                            className={'ml-2 bg-gray-50 text-black hover:bg-gray-300 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-700 px-2 py-2'}
                             onClick={handleBackButtonClick}>
                             <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
                         </Button>
@@ -106,7 +106,7 @@ const IssueList = (props: IssueListProps) => {
                         className={'ml-2 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6 py-2 flex flex-row justify-start items-center w-full text-left text-sm'}
                         onClick={() => { handleFilterButtonClick('') }}>
                         <AdjustmentsHorizontalIcon className="h-5 w-5 mr-2" aria-hidden="true" />
-                        Reset 
+                        Reset
                     </Button>
                 </div>
                 <div className='flex items-center justify-left'>

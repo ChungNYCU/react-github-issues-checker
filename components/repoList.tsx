@@ -36,7 +36,7 @@ const RepoList = (props: RepoListProps) => {
             <div className='mt-10 mb-5 flex flex-row items-center justify-between'>
                 <div className='flex items-center justify-left'>
                     <Button
-                        className={'ml-2 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-2 py-2'}
+                        className={'ml-2 bg-gray-50 text-black hover:bg-gray-300 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-700 px-2 py-2'}
                         onClick={handleBackButtonClick}>
                         <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
                     </Button>
