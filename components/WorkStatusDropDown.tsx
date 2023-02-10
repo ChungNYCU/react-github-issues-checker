@@ -20,19 +20,19 @@ const WorkStatusDropDown = (props: WorkStatusDropDownProps) => {
 
     switch (props.workStatus) {
         case WorkStatus.Open: {
-            menuButtonClass = 'inline-flex w-full justify-center rounded-md hover:ring-2 hover:ring-gray-300  bg-blue-300 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 ease-in duration-300'
+            menuButtonClass = 'inline-flex w-full justify-center rounded-md hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-700 bg-blue-300 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 ease-in duration-300'
             break;
         }
         case WorkStatus.InProgress: {
-            menuButtonClass = 'inline-flex w-full justify-center rounded-md hover:ring-2 hover:ring-gray-300  bg-red-300 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 ease-in duration-300'
+            menuButtonClass = 'inline-flex w-full justify-center rounded-md hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-700 bg-red-300 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 ease-in duration-300'
             break;
         }
         case WorkStatus.Done: {
-            menuButtonClass = 'inline-flex w-full justify-center rounded-md hover:ring-2 hover:ring-gray-300  bg-green-300 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 ease-in duration-300'
+            menuButtonClass = 'inline-flex w-full justify-center rounded-md hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-700 bg-green-300 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 ease-in duration-300'
             break;
         }
         default: {
-            menuButtonClass = 'inline-flex w-full justify-center rounded-md hover:ring-2 hover:ring-gray-300  bg-gray-300 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-2 ease-in duration-300'
+            menuButtonClass = 'inline-flex w-full justify-center rounded-md hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-700 bg-gray-300 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-2 ease-in duration-300'
             break;
         }
     }
