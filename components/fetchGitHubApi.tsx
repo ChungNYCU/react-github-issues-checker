@@ -66,8 +66,6 @@ export const updateIssue = async (username: string, reponame: string, issue: num
 
     if (reqBody.state) {
         Router.push(`/${username}/${reponame}/issues`)
-    } else {
-        Router.reload()
     }
 }
 
