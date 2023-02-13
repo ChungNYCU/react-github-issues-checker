@@ -88,3 +88,35 @@ NEXTAUTH_URL= 'Your Homepage URL'
 
 Console playback of Local Development installation.
 [![Console playback](https://i.imgur.com/YRHHl9z.png)](https://youtu.be/QfTOnhn4oCo)
+
+
+### Design
+In this project we are using path to get Api parameters or construct the request body like below tree.
+```
+├─api
+│  └─auth
+└─[username]
+    └─[reponame]
+        └─issues
+            └─[issue]
+```
+
+#### Example:
+![](https://i.imgur.com/yWLiU2Z.png)
+
+The Api endpoint will be like:
+`https://api.github.com/repos/${username}/${reponame}/issues/${issue}`
+
+Fetch function:
+``` typescript
+const fetchRepoTitleAndBody = async (
+    username: string, reponame: string, issue: number, setTitle: any, setBody: any) => {
+    fetch(`https://api.github.com/repos/${username}/${reponame}/issues/${issue}`)
+        .then(response => response.json())
+        .then(data => {
+            setTitle(data.title)
+            setBody(data.body)
+        })
+        .catch(error => console.error(error))
+}
+```
