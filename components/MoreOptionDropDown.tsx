@@ -33,7 +33,7 @@ const MoreOptionDropDown = (props: MoreOptionDropDownProps) => {
                         <Menu.Item>
                             {({ active }) => (
                                 <button onClick={props.onEditButtonClick} className={classNames(active ? 'bg-gray-300 text-gray-900' : 'bg-gray-100 text-gray-900',
-                                    'flex flex-row justify-start items-center px-4 py-2 text-sm ease-in duration-300')}>
+                                    'flex flex-row justify-start items-center w-full px-4 py-2 text-left text-sm ease-in duration-300')}>
                                     <PencilSquareIcon className="h-4 w-4 mr-2" aria-hidden="true" />Edit
                                 </button>
                             )}
