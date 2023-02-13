@@ -47,10 +47,6 @@ const IssueList = (props: IssueListProps) => {
         fetchRepoIssues(props.username, props.reponame, page, labels, sort, direction, setRepoIssues, setLoadMore, setLoading)
     }, [page, labels, direction])
 
-    useEffect(() => {
-        fetchRepoIssues(props.username, props.reponame, page, labels, sort, direction, setRepoIssues, setLoadMore, setLoading)
-    }, [page, labels, direction])
-
     const getWorkStatus = (labels: []) => {
         for (let label of labels) {
             //@ts-ignore

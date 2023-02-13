@@ -41,7 +41,7 @@ const About = () => {
                 <li>你可能會需要 GitHub Search documentation 或 GitHub GraphQL API Explorer <span className='text-green-500 font-bold'>&#x2713;</span></li>
             </ul>
 
-            <h6 className="mt-10 font-semibold">User Interface</h6>
+            <h6 className="mt-10 font-semibold">User Interface <span className='text-green-500 font-bold'>&#x2713;</span></h6>
 
             <p className="mt-3 font-semibold">列表頁 <span className='text-green-500 font-bold'>&#x2713;</span></p>
             <ul className="mt-1 list-disc">
