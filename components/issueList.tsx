@@ -96,9 +96,11 @@ const IssueList = (props: IssueListProps) => {
                     </div>
 
                 </div>
-                <div className='flex items-center justify-left'>
-                    <Button className='ml-2 bg-yellow-300 text-black hover:bg-yellow-500 hover:text-white px-6 py-2 ' onClick={() => { }}>Create Issue</Button>
-                </div>
+                <Link href={`/${props.username}/${props.reponame}/createIssue`}>
+                    <div className='flex items-center justify-left'>
+                        <Button className='ml-2 bg-yellow-300 text-black hover:bg-yellow-500 hover:text-white px-6 py-2 ' onClick={() => { }}>Create Issue</Button>
+                    </div>
+                </Link>
             </div>
 
             <div className='mt-2 mb-5 flex flex-row items-center justify-between'>
