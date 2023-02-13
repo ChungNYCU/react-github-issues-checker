@@ -78,6 +78,7 @@ const IssueList = (props: IssueListProps) => {
     // UseEffect hook to fetch the repository issues when the page number changes
     useEffect(() => {
         fetchRepoIssues(props.username, props.reponame, page, labels, sort, direction, setRepoIssues, setLoadMore, setLoading)
+        console.log(repoIssues)
     }, [page, labels, direction])
 
 
@@ -130,7 +131,9 @@ const IssueList = (props: IssueListProps) => {
             {repoIssues.map((issue: any, i: number) => (
                 <Link legacyBehavior href={`/${props.username}/${props.reponame}/issues/${issue.number}`} className='' key={'link' + i}>
                     <div>
-                        <IssueCard number={issue.number} title={issue.title} body={issue.body} workStatus={getWorkStatus(issue.labels)!} className='mt-2' onClick={() => { }} key={i} />
+                        <IssueCard number={issue.number} title={issue.title} body={issue.body}
+                            workStatus={getWorkStatus(issue.labels)!} createdAt={issue.created_at}
+                            className='mt-2' onClick={() => { }} key={i} />
                     </div>
                 </Link>
             ))}
