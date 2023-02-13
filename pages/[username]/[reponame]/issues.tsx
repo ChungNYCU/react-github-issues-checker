@@ -30,7 +30,7 @@ const Issues = ({ username, reponame }: InferGetServerSidePropsType<typeof getSe
       </div>
     </>
   )
-};
+}
 
 // A function that fetches the data needed for the component 'Issues'
 export const getServerSideProps: GetServerSideProps = async (context) => {
