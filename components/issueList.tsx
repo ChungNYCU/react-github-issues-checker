@@ -2,6 +2,7 @@ import { useEffect, useState, MouseEventHandler } from 'react'
 import { useBottomScrollListener } from 'react-bottom-scroll-listener'
 
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 import { ArrowLeftIcon, AdjustmentsHorizontalIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'
 
 import { fetchRepoIssues, handleBackButtonClick } from './fetchGitHubApi'
@@ -35,6 +36,16 @@ const IssueList = (props: IssueListProps) => {
     const [sort, setSort] = useState('created') // created, updated, comments
     const [direction, setDirection] = useState('desc') // asc, desc
 
+    // UseEffect hook to set the page number when the page count changes
+    useEffect(() => {
+        setPage(PER_PAGE * pageCount)
+    }, [pageCount])
+
+    // UseEffect hook to fetch the repository issues when the page, labels, direction, and loadMore changes
+    useEffect(() => {
+        fetchRepoIssues(props.username, props.reponame, page, labels, sort, direction, setRepoIssues, setLoadMore, setLoading)
+    }, [page, labels, direction])
+
     const getWorkStatus = (labels: []) => {
         for (let label of labels) {
             //@ts-ignore
@@ -58,28 +69,38 @@ const IssueList = (props: IssueListProps) => {
     const handleResetButtonClick = () => {
         handleFilterButtonClick('')
         setDirection('desc')
+        setPage(PER_PAGE * pageCount)
+        setLoadMore(true)
     }
+
+    // Handles the submit event on form submit.
+    const handleSubmit = async (event: any) => {
+
+        // Stop the form from submitting and refreshing the page.
+        event.preventDefault()
+
+        // Get querystring from the form.
+        const querystring = event.target.search.value.replace(' ', '+')
+        setPage(100)
+
+        fetch(`https://api.github.com/search/issues?q=${querystring}+repo:${props.username}/${props.reponame}&per_page=${page}`)
+            .then(response => response.json())
+            .then(data => {
+                setRepoIssues(data.items)
+                setLoading(false)
+                setLoadMore(false)
+            })
+            .catch(error => console.error(error))
+    }
+
 
     // UseBottomScrollListener hook to detect when the user has scrolled to the bottom of the page
     useBottomScrollListener(() => {
         // If there are still issues to be loaded, increase the page count to load the next page
         if (loadMore === true) {
             setPageCount(pageCount + 1)
-        } else {
-            console.log('No more issue')
         }
     })
-
-    // UseEffect hook to set the page number when the page count changes
-    useEffect(() => {
-        setPage(PER_PAGE * pageCount)
-    }, [pageCount])
-
-    // UseEffect hook to fetch the repository issues when the page number changes
-    useEffect(() => {
-        fetchRepoIssues(props.username, props.reponame, page, labels, sort, direction, setRepoIssues, setLoadMore, setLoading)
-    }, [page, labels, direction])
-
 
     return (
         <div className={`${props.className} mt-3`}>
@@ -123,13 +144,15 @@ const IssueList = (props: IssueListProps) => {
                         Reset
                     </Button>
                 </div>
-                <div className='flex items-center justify-left'>
-                    <input className="shadow appearance-none border border-gray-200 dark:border-gray-700 rounded w-full py-1 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search"></input>
-                    <Button className='ml-2 bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => { }}>Search</Button>
+                <div>
+                    <form onSubmit={handleSubmit} className='flex items-center justify-left'>
+                        <input className="shadow appearance-none border border-gray-200 dark:border-gray-700 rounded w-full py-1 px-3 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search" required></input>
+                        <Button className='ml-2 bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => { }}>Search</Button>
+                    </form>
                 </div>
             </div>
 
-            {repoIssues.map((issue: any, i: number) => (
+            {repoIssues?.map((issue: any, i: number) => (
                 <Link legacyBehavior href={`/${props.username}/${props.reponame}/issues/${issue.number}`} className='' key={'link' + i}>
                     <div>
                         <IssueCard number={issue.number} title={issue.title} body={issue.body}
@@ -138,8 +161,9 @@ const IssueList = (props: IssueListProps) => {
                     </div>
                 </Link>
             ))}
+            {!repoIssues && <div className='mt-5 flex justify-center'>Something went wrong, please try again.</div>}
             {isLoading && <Loading />}
-            {!loadMore && <div className='mt-5 flex justify-center'>No more issue</div>}
+            {!loadMore && repoIssues && <div className='mt-5 flex justify-center'>No more issue</div>}
         </div>
     )
 }
