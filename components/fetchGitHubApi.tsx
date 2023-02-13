@@ -34,9 +34,9 @@ export const fetchRepos = async (username: string, setData: any, setLoading: any
 }
 
 // Function to fetch the repository issues from Github API, ref in file issueList.tsx
-export const fetchRepoIssues = async (username: string, reponame: string, page: number, labels: string, setData: any, setLoadMore: any, setLoading: any) => {
+export const fetchRepoIssues = async (username: string, reponame: string, page: number, labels: string, sort: any, direction: any, setData: any, setLoadMore: any, setLoading: any) => {
     setLoading(true)
-    fetch(`https://api.github.com/repos/${username}/${reponame}/issues?per_page=${page}&labels=${labels}`)
+    fetch(`https://api.github.com/repos/${username}/${reponame}/issues?per_page=${page}&labels=${labels}&sort=${sort}&direction=${direction}`)
         .then(response => response.json())
         .then(data => {
             // If number of issues received is less than the requested page, it means there are no more issues to be loaded

@@ -2,7 +2,7 @@ import { useEffect, useState, MouseEventHandler } from 'react'
 import { useBottomScrollListener } from 'react-bottom-scroll-listener'
 
 import Link from 'next/link'
-import { ArrowLeftIcon, AdjustmentsHorizontalIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
+import { ArrowLeftIcon, AdjustmentsHorizontalIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'
 
 import { fetchRepoIssues, handleBackButtonClick } from './fetchGitHubApi'
 import Button from './Button'
@@ -32,6 +32,8 @@ const IssueList = (props: IssueListProps) => {
     const [repoIssues, setRepoIssues] = useState<Object[]>([])
     const [isLoading, setLoading] = useState(false)
     const [loadMore, setLoadMore] = useState<boolean>(true)
+    const [sort, setSort] = useState('created') // created, updated, comments
+    const [direction, setDirection] = useState('desc') // asc, desc
 
     const getWorkStatus = (labels: []) => {
         for (let label of labels) {
@@ -47,6 +49,15 @@ const IssueList = (props: IssueListProps) => {
 
     const handleFilterButtonClick = (label: string) => {
         setLabels(label)
+    }
+
+    const handleSortButtonClick = () => {
+        setDirection(direction === 'desc' ? 'asc' : 'desc')
+    }
+
+    const handleResetButtonClick = () => {
+        handleFilterButtonClick('')
+        setDirection('desc')
     }
 
     // UseBottomScrollListener hook to detect when the user has scrolled to the bottom of the page
@@ -66,8 +77,8 @@ const IssueList = (props: IssueListProps) => {
 
     // UseEffect hook to fetch the repository issues when the page number changes
     useEffect(() => {
-        fetchRepoIssues(props.username, props.reponame, page, labels, setRepoIssues, setLoadMore, setLoading)
-    }, [page, labels])
+        fetchRepoIssues(props.username, props.reponame, page, labels, sort, direction, setRepoIssues, setLoadMore, setLoading)
+    }, [page, labels, direction])
 
 
     return (
@@ -98,13 +109,14 @@ const IssueList = (props: IssueListProps) => {
                     />
                     <Button
                         className='ml-2 inline-flex w-full justify-center rounded-md hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-700 bg-gray-300 px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-2'
-                        onClick={() => { }}>
+                        onClick={() => { handleSortButtonClick() }}>
                         Order
-                        <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+                        {direction === 'desc' && <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />}
+                        {direction === 'asc' && <ChevronUpIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />}
                     </Button>
                     <Button
                         className={'ml-2 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6 py-2 flex flex-row justify-start items-center w-full text-left text-sm'}
-                        onClick={() => { handleFilterButtonClick('') }}>
+                        onClick={() => { handleResetButtonClick() }}>
                         <AdjustmentsHorizontalIcon className="h-5 w-5 mr-2" aria-hidden="true" />
                         Reset
                     </Button>
