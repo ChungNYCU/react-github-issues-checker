@@ -78,7 +78,6 @@ const IssueList = (props: IssueListProps) => {
     // UseEffect hook to fetch the repository issues when the page number changes
     useEffect(() => {
         fetchRepoIssues(props.username, props.reponame, page, labels, sort, direction, setRepoIssues, setLoadMore, setLoading)
-        console.log(repoIssues)
     }, [page, labels, direction])
 
 
