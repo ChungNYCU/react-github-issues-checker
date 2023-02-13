@@ -47,8 +47,8 @@ const About = () => {
             <ul className="mt-1 list-disc">
                 <li>第一次只能載入 10 筆 <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>每當列表滾到底部時要需要自動發送 API 請求,並載入額外 10 筆,直到沒有更多 Task <span className='text-green-500 font-bold'>&#x2713;</span></li>
-                <li>能夠根據 Task 的狀態 (Open / In Progress / Done) 進行篩選,預設顯示所有 Task</li>
-                <li>能夠根據建立的時間進行排序,預設根據建立時間從新到舊</li>
+                <li>能夠根據 Task 的狀態 (Open / In Progress / Done) 進行篩選,預設顯示所有 Task <span className='text-green-500 font-bold'>&#x2713;</span></li>
+                <li>能夠根據建立的時間進行排序,預設根據建立時間從新到舊 <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>能夠根據 Task 的內容進行搜尋</li>
             </ul>
             <p className="mt-3 font-semibold">Task 詳情頁</p>
