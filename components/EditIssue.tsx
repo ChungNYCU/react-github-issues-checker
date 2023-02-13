@@ -4,20 +4,14 @@ import { useSession } from 'next-auth/react'
 import Router from 'next/router'
 import { ArrowLeftIcon } from '@heroicons/react/20/solid'
 
+import { fetchRepoTitleAndBody, handleBackButtonClick } from './fetchGitHubApi'
 import Button from './Button'
 import { WorkStatus } from '@/modules/WorkStatus'
-import { fetchRepoIssue, fetchRepoTitleAndBody, handleBackButtonClick } from './fetchGitHubApi'
 
 type EditIssueProps = {
     username: string;
     reponame: string;
     issue: string;
-}
-
-type IssueProps = {
-    state: string;
-    title: string;
-    body: string;
 }
 
 const EditIssue = (props: EditIssueProps) => {

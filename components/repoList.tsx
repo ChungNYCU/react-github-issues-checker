@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { ArrowLeftIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 
 import { fetchRepos, handleBackButtonClick } from './fetchGitHubApi'
-import RepoCard from './RepoCard'
-import Loading from './Loading'
 import Button from './Button'
+import Loading from './Loading'
+import RepoCard from './RepoCard'
 
 type RepoListProps = {
     username: string;

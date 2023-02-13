@@ -1,9 +1,6 @@
-import Link from 'next/link'
-
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 
-import Button from '@/components/Button'
 import EditIssue from '@/components/EditIssue'
 
 // Defining an interface for the URL parameters

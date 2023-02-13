@@ -6,7 +6,7 @@ import { ArrowLeftIcon } from '@heroicons/react/20/solid'
 
 import Button from './Button'
 import { WorkStatus } from '@/modules/WorkStatus'
-import { fetchRepoIssue, handleBackButtonClick } from './fetchGitHubApi'
+import { handleBackButtonClick } from './fetchGitHubApi'
 
 type CreateIssueProps = {
     username: string;

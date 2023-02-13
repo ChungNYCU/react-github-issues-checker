@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 
+import { fetchRepoIssue } from '@/components/fetchGitHubApi'
 import IssueDetailCard from '@/components/IssueDetailCard'
 import Loading from '@/components/Loading'
-import { fetchRepoIssue } from '@/components/fetchGitHubApi'
 import { WorkStatus } from '@/modules/WorkStatus'
 
 // Defining an interface for the URL parameters
