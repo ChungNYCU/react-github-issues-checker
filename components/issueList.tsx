@@ -30,11 +30,12 @@ const IssueList = (props: IssueListProps) => {
     const [pageCount, setPageCount] = useState<number>(1)
     const [page, setPage] = useState<number>(PER_PAGE * pageCount)
     const [labels, setLabels] = useState<string>('')
+    const [sort, setSort] = useState('created') // created, updated, comments
+    const [direction, setDirection] = useState('desc') // asc, desc
     const [repoIssues, setRepoIssues] = useState<Object[]>([])
     const [isLoading, setLoading] = useState(false)
     const [loadMore, setLoadMore] = useState<boolean>(true)
-    const [sort, setSort] = useState('created') // created, updated, comments
-    const [direction, setDirection] = useState('desc') // asc, desc
+    
 
     // UseEffect hook to set the page number when the page count changes
     useEffect(() => {
@@ -42,6 +43,10 @@ const IssueList = (props: IssueListProps) => {
     }, [pageCount])
 
     // UseEffect hook to fetch the repository issues when the page, labels, direction, and loadMore changes
+    useEffect(() => {
+        fetchRepoIssues(props.username, props.reponame, page, labels, sort, direction, setRepoIssues, setLoadMore, setLoading)
+    }, [page, labels, direction])
+
     useEffect(() => {
         fetchRepoIssues(props.username, props.reponame, page, labels, sort, direction, setRepoIssues, setLoadMore, setLoading)
     }, [page, labels, direction])
@@ -83,7 +88,7 @@ const IssueList = (props: IssueListProps) => {
         const querystring = event.target.search.value.replace(' ', '+')
         setPage(100)
 
-        fetch(`https://api.github.com/search/issues?q=${querystring}+repo:${props.username}/${props.reponame}&per_page=${page}`)
+        fetch(`https://api.github.com/search/issues?q=${querystring}+repo:${props.username}/${props.reponame}&per_page=${page}&sort=${sort}&order=${direction}`)
             .then(response => response.json())
             .then(data => {
                 setRepoIssues(data.items)
@@ -92,7 +97,6 @@ const IssueList = (props: IssueListProps) => {
             })
             .catch(error => console.error(error))
     }
-
 
     // UseBottomScrollListener hook to detect when the user has scrolled to the bottom of the page
     useBottomScrollListener(() => {

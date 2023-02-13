@@ -31,7 +31,6 @@ export const authOptions: AuthOptions = {
             session.accessToken = token.accessToken
             //@ts-ignore
             session.user.id = token.id
-            console.log(session.accessToken)
             return session
         }
     },

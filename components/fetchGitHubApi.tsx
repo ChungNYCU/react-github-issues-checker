@@ -73,12 +73,8 @@ export const updateIssue = async (username: string, reponame: string, issue: num
         },
     })
         .then((response) => response.json())
-        .then((json) => console.log(json))
         .catch(error => console.error(error))
-
-    if (reqBody.state) {
-        Router.push(`/${username}/${reponame}/issues`)
-    }
+    Router.back()
 }
 
 
