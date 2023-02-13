@@ -17,7 +17,7 @@ const About = () => {
                 <li>使用 React.js 或基於此的框架,例如 Next.js <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>不限制使用任何第三方 library <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>請使用 Git 版本控制,並將程式碼上傳至 GitHub 上,作業完成後繳交連結即可 <span className='text-green-500 font-bold'>&#x2713;</span></li>
-                <li>請在 README 內說明如何啟動專案與作業架構的設計</li>
+                <li>請在 README 內說明如何啟動專案與作業架構的設計 <span className='text-green-500 font-bold'>&#x2713;</span></li>
             </ul>
 
             <h5 className="font-semibold mt-20 dark:text-blue-500">功能</h5>
