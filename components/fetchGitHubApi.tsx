@@ -22,15 +22,13 @@ export const fetchRepoIssue = async (username: string, reponame: string, issue: 
 }
 
 // Function to fetch the specific repository issue, ref in file [issue].tsx
-export const fetchRepoTitleAndBody = async (username: string, reponame: string, issue: number, setTitle: any, setBody: any, setLoading: any) => {
-    setLoading(true)
+export const fetchRepoTitleAndBody = async (username: string, reponame: string, issue: number, setTitle: any, setBody: any) => {
     fetch(`https://api.github.com/repos/${username}/${reponame}/issues/${issue}`)
         .then(response => response.json())
         .then(data => {
             // Updating the repository issues state with the received data
             setTitle(data.title)
             setBody(data.body)
-            setLoading(false)
         })
         .catch(error => console.error(error))
 }

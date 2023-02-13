@@ -20,14 +20,13 @@ const EditIssue = (props: EditIssueProps) => {
     const [token, setToken] = useState<any>('')
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
-    const [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
         setToken(session?.accessToken)
     }, [])
 
     useEffect(() => {
-        fetchRepoTitleAndBody(props.username, props.reponame, Number(props.issue), setTitle, setBody, setLoading)
+        fetchRepoTitleAndBody(props.username, props.reponame, Number(props.issue), setTitle, setBody)
     }, [])
 
     const handleTitleChange = (event: any) => {
