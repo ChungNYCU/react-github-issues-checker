@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 
 import { useSession } from 'next-auth/react'
 import Router from 'next/router'
+import { ArrowLeftIcon } from '@heroicons/react/20/solid'
 
 import Button from './Button'
 import { WorkStatus } from '@/modules/WorkStatus'
+import { handleBackButtonClick } from './fetchGitHubApi'
 
 type EditIssueProps = {
     username: string;
@@ -60,44 +62,56 @@ const EditIssue = (props: EditIssueProps) => {
 
     return (
         // We pass the event to the handleSubmit() function on submit.
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Issue title</label>
-            <div className='flex items-center justify-between'>
+        <div>
+            <div className='flex items-center justify-left '>
+                <div>
+                    <Button
+                        className={'mb-5 bg-gray-50 text-black hover:bg-gray-300 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-700 px-2 py-2'}
+                        onClick={handleBackButtonClick}>
+                        <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
+                    </Button>
+                </div>
+            </div>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Issue title</label>
+                <div className='flex items-center justify-between'>
 
-                <input type="text" id="title" name="title"
-                    className="mr-2 block p-2.5 w-5/6 text-sm text-gray-900 bg-gray-50 rounded-lg border 
+                    <input type="text" id="title" name="title"
+                        className="mr-2 block p-2.5 w-5/6 text-sm text-gray-900 bg-gray-50 rounded-lg border 
                             border-gray-300 focus:ring-blue-500 focus:border-blue-500 
                             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                             dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Enter issue title"
-                    required />
+                        placeholder="Enter issue title"
+                        required />
 
-                <select name="labels" id="labels"
-                    className="block p-2.5 w-1/6 text-sm text-gray-900 bg-gray-50 rounded-lg border 
+                    <select name="labels" id="labels"
+                        className="block p-2.5 w-1/6 text-sm text-gray-900 bg-gray-50 rounded-lg border 
                             border-gray-300 focus:ring-blue-500 focus:border-blue-500 
                             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                             dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value={WorkStatus.Open}>{WorkStatus.Open}</option>
-                    <option value={WorkStatus.InProgress}>{WorkStatus.InProgress}</option>
-                    <option value={WorkStatus.Done}>{WorkStatus.Done}</option>
-                </select>
+                        <option value={WorkStatus.Open}>{WorkStatus.Open}</option>
+                        <option value={WorkStatus.InProgress}>{WorkStatus.InProgress}</option>
+                        <option value={WorkStatus.Done}>{WorkStatus.Done}</option>
+                    </select>
 
-            </div><br />
+                </div><br />
 
-            <label htmlFor="body" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Issue body</label>
-            <textarea id="body" rows={6} minLength={30}
-                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border 
+                <label htmlFor="body" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Issue body</label>
+                <textarea id="body" rows={6} minLength={30}
+                    className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border 
                         border-gray-300 focus:ring-blue-500 focus:border-blue-500 
                         dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                         dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Enter issue body"
-                required>
-            </textarea><br />
+                    placeholder="Enter issue body"
+                    required>
+                </textarea><br />
 
-            <div className='flex items-center justify-end'>
-                <Button className='bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => { }}>Submit</Button>
-            </div>
-        </form>
+                <div className='flex items-center justify-end'>
+                    <Button className='bg-blue-300 text-black hover:bg-blue-500 hover:text-white px-6' onClick={() => { }}>Submit</Button>
+                </div>
+            </form>
+        </div>
+
     )
 }
 
