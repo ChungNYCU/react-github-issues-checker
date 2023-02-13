@@ -4,6 +4,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid'
 
 type MoreOptionDropDownProps = {
+    onEditButtonClick: MouseEventHandler<HTMLButtonElement>;
     onDeleteButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -31,15 +32,10 @@ const MoreOptionDropDown = (props: MoreOptionDropDownProps) => {
                     <div className="py-1">
                         <Menu.Item>
                             {({ active }) => (
-                                <a
-                                    href="#"
-                                    className={classNames(
-                                        active ? 'bg-gray-300 text-gray-900' : 'bg-gray-100 text-gray-900',
-                                        'flex flex-row justify-start items-center px-4 py-2 text-sm ease-in duration-300'
-                                    )}
-                                >
+                                <button onClick={props.onEditButtonClick} className={classNames(active ? 'bg-gray-300 text-gray-900' : 'bg-gray-100 text-gray-900',
+                                    'flex flex-row justify-start items-center px-4 py-2 text-sm ease-in duration-300')}>
                                     <PencilSquareIcon className="h-4 w-4 mr-2" aria-hidden="true" />Edit
-                                </a>
+                                </button>
                             )}
                         </Menu.Item>
                         <Menu.Item>

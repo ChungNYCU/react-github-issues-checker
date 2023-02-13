@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { useSession } from 'next-auth/react'
 import { ArrowLeftIcon } from '@heroicons/react/20/solid'
+import Router from 'next/router'
 
 import { updateIssue, handleBackButtonClick } from './fetchGitHubApi'
 import Button from './Button'
@@ -33,7 +34,9 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
         updateIssue(props.username, props.reponame, props.issue, token, ReqBody)
     }
 
-
+    const handleEditButtonClick = () => {
+        Router.push(`/${props.username}/${props.reponame}/issues/${props.issue}/editIssue`)
+    }
 
     return (
         <div className='m-2 bg-gray-200  dark:bg-gray-700 border dark:border-gray-700 rounded-lg'>
@@ -55,7 +58,7 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
                         {props.state === 'closed' && <Button className='ml-2 ease-in duration-300 bg-gray-300 text-black hover:bg-gray-500 hover:text-white px-6' onClick={() => { }}>Closed</Button>}
                     </div>
                 </div>
-                <MoreOptionDropDown onDeleteButtonClick={() => { handleStatusButtonClick({ state: 'closed' }) }} />
+                <MoreOptionDropDown onEditButtonClick={handleEditButtonClick} onDeleteButtonClick={() => { handleStatusButtonClick({ state: 'closed' }) }} />
             </div>
             <div className='m-10'>
                 <h4 className='mt-10 font-bold'>{`#${props.issue} ${props.title}`}</h4>
