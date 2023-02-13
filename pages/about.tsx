@@ -22,17 +22,17 @@ const About = () => {
 
             <h5 className="font-semibold mt-20 dark:text-blue-500">功能</h5>
 
-            <h6 className="mt-5 font-semibold">GitHub Login</h6>
+            <h6 className="mt-5 font-semibold">GitHub Login <span className='text-green-500 font-bold'>&#x2713;</span></h6>
             <ul className="mt-1 list-disc">
                 <li>請串接 GitHub OAuth,讓使用者有權限操作 GitHub API <span className='text-green-500 font-bold'>&#x2713;</span></li>
-                <li>詳見 GitHub OAuth documentation</li>
+                <li>詳見 GitHub OAuth documentation <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>注意:在登入時需要求正確的 scope</li>
             </ul>
 
             <h6 className="mt-5 font-semibold">Task Management</h6>
             <ul className="mt-1 list-disc">
                 <li>請將 GitHub Issue 作為 Task,以 GitHub Issue 實作, 並將 close Issue 視為刪除 Task <span className='text-green-500 font-bold'>&#x2713;</span></li>
-                <li>你可能會需要 GitHub Issue documentation 或 GitHub GraphQL API Explorer</li>
+                <li>你可能會需要 GitHub Issue documentation 或 GitHub GraphQL API Explorer <span className='text-green-500 font-bold'>&#x2713;</span></li>
             </ul>
 
             <h6 className="mt-5 font-semibold">Task Search</h6>
@@ -51,15 +51,15 @@ const About = () => {
                 <li>能夠根據建立的時間進行排序,預設根據建立時間從新到舊 <span className='text-green-500 font-bold'>&#x2713;</span></li>
                 <li>能夠根據 Task 的內容進行搜尋</li>
             </ul>
-            <p className="mt-3 font-semibold">Task 詳情頁</p>
+            <p className="mt-3 font-semibold">Task 詳情頁 <span className='text-green-500 font-bold'>&#x2713;</span></p>
             <ul className="mt-1 list-disc">
                 <li>顯示 Task 內容、狀態 <span className='text-green-500 font-bold'>&#x2713;</span></li>
-                <li>使用者可以在此「編輯」、「刪除」</li>
+                <li>使用者可以在此「編輯」、「刪除」<span className='text-green-500 font-bold'>&#x2713;</span></li>
             </ul>
-            <p className="mt-3 font-semibold">新增 / 編輯 Task 時,可以使用 Modal 或跳轉至新的頁面操作</p>
+            <p className="mt-3 font-semibold">新增 / 編輯 Task 時,可以使用 Modal 或 <span className='text-green-500 font-bold'>跳轉至新的頁面操作 &#x2713;</span></p>
             <ul className="mt-1 list-disc">
-                <li>至少需要使用 title 和 body 兩個欄位</li>
-                <li>表單驗證:title 為必填,body 至少需要 30 字</li>
+                <li>至少需要使用 title 和 body 兩個欄位 <span className='text-green-500 font-bold'>&#x2713;</span></li>
+                <li>表單驗證:title 為必填,body 至少需要 30 字 <span className='text-green-500 font-bold'>&#x2713;</span></li>
             </ul>
 
 
