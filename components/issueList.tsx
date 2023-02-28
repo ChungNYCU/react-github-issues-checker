@@ -81,7 +81,7 @@ const IssueList = (props: IssueListProps) => {
         event.preventDefault()
 
         // Get querystring from the form.
-        const querystring = event.target.search.value.replace(' ', '+')
+        const querystring = event.target.search.value.replace(/[\|&;\$%@"<>\(\)\+,#]/g, '')
         setPage(100)
 
         fetch(`https://api.github.com/search/issues?q=${querystring}+repo:${props.username}/${props.reponame}&per_page=${page}&sort=${sort}&order=${direction}`)
