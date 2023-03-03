@@ -62,7 +62,7 @@ const IssueDetailCard = (props: IssueDetailCardProps) => {
             </div>
             <div className='m-10'>
                 <h4 className='mt-10 font-bold'>{`#${props.issue} ${props.title}`}</h4>
-                <p className='mt-5'>{props.body}</p>
+                <pre className='mt-5'>{props.body}</pre>
             </div>
             <div></div>
         </div>
