@@ -11,7 +11,7 @@ const About = () => {
                 He hopes that you, who are familiar with front-end development, can help him complete this project.</p>
 
             <h5 className="font-semibold mt-20 dark:text-blue-500">Description</h5>
-            <p className="mt-5">By integrating the GitHub API, users are able to "create", "update", and "search" tasks, as well as update the status of tasks. </p>
+            <p className="mt-5">By integrating the GitHub API, users are able to create, update, and search tasks, as well as update the status of tasks. </p>
 
             <h5 className="font-semibold mt-20 dark:text-blue-500">Features</h5>
 
